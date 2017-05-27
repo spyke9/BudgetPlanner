@@ -1,0 +1,20 @@
+1. 
+- CRUD na Transaction w TransactionRepository
+- sumowanie transakcji wychodzących z poprzedniego miesiąca do wydatków (w tym powtarzających się - recurring)
+- sumowanie transakcji przychodzących z poprzedniego miesiąca do przychodów (w tym powtarzających się - recurring)
+
+2. wyliczanie wydatków dla danej kategorii (CategorySpending <- TransactionRepository)
+
+3. wyliczanie wydatków dla danej kategorii (Summary <- TransactionRepository)
+
+4.
+- zapis i odczyt TransactionRepository z pliku
+- zapis i odczyt SummaryRepository z pliku
+
+5. obliczanie i rysowanie wykresów
+
+6. CRUD na Summary w SummaryRepository
+
+7. prognozowanie wydatków dla BudgetPlanner
+
+8. wyświetlanie historii transakcji (z TransactionRepository)
