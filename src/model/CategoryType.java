@@ -1,0 +1,8 @@
+package model;
+
+public enum CategoryType {
+    FOOD_AND_GROCERIES, HOUSING, UTILITIES,
+    HEALTH_CARE, PERSONAL_CARE,
+    ENTERTAINMENT, EDUCATION,
+    CONSUMER_DEBT, OTHER;
+}
