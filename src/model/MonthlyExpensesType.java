@@ -1,9 +1,20 @@
 package model;
 
-public class MonthlyExpensesType {
+import java.io.Serializable;
+import java.time.LocalDate;
 
-    private DateType date;
+public class MonthlyExpensesType implements Serializable {
+
+    private LocalDate date;
     private double expenses;
+
+    public MonthlyExpensesType() {
+    }
+
+    public MonthlyExpensesType(LocalDate date, double expenses) {
+        this.date = date;
+        this.expenses = expenses;
+    }
 
     public double getExpenses() {
         return expenses;
