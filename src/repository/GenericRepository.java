@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by szkutek on 12.06.17.
  */
-public class GenericRepository<ID, T extends Serializable> {
+public class GenericRepository<ID, T extends Serializable> implements Serializable {
     protected Map<ID, T> items = new HashMap<>();
 
     public T getById(ID id) {
@@ -24,7 +24,7 @@ public class GenericRepository<ID, T extends Serializable> {
         items.replace(id, item);
     }
 
-    public void remove(ID id){
+    public void remove(ID id) {
         items.remove(id);
     }
 
