@@ -40,7 +40,7 @@ public class CategorySpendingStats implements IStatistics {
     public List<MonthlyExpensesType> getSpending() {
         return spending;
     }
-    
+
 
     @Override
     public void drawPlot() {

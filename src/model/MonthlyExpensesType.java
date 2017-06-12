@@ -23,4 +23,12 @@ public class MonthlyExpensesType implements Serializable {
     public void setExpenses(double expenses) {
         this.expenses = expenses;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }
