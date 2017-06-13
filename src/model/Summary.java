@@ -9,6 +9,11 @@ public class Summary implements Serializable {
     private Map<CategoryType, CategoryExpensesType> expenses;
     private double income;
 
+    public Summary(LocalDate date, double income) {
+        this.date = date;
+        this.income = income;
+    }
+
     public LocalDate getDate() {
         return date;
     }
@@ -31,5 +36,9 @@ public class Summary implements Serializable {
 
     public void setIncome(double income) {
         this.income = income;
+    }
+
+    public void addExpense(CategoryExpensesType categoryExpensesType) {
+        expenses.put(categoryExpensesType.getCategory(), categoryExpensesType);
     }
 }
