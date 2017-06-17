@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;

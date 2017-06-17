@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 public enum CategoryType {
     FOOD_AND_GROCERIES, HOUSING, UTILITIES,

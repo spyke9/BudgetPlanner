@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 public interface IStatistics {
 

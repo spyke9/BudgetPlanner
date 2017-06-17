@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,6 +8,9 @@ public class Summary implements Serializable {
     private LocalDate date;
     private Map<CategoryType, CategoryExpensesType> expenses;
     private double income;
+
+    public Summary() {
+    }
 
     public Summary(LocalDate date, double income) {
         this.date = date;

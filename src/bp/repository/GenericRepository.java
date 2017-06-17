@@ -1,4 +1,4 @@
-package repository;
+package bp.repository;
 
 import java.io.Serializable;
 import java.util.Collection;

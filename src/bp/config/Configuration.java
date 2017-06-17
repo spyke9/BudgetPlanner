@@ -1,3 +1,5 @@
+package bp.config;
+
 /**
  * Created by szkutek on 12.06.17.
  */
