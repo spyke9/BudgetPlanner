@@ -1,6 +1,7 @@
 package bp.repository;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,5 +31,9 @@ public class GenericRepository<ID, T extends Serializable> implements Serializab
 
     public Collection<T> getAll() {
         return Collections.unmodifiableCollection(items.values());
+    }
+
+    public Collection<ID> getKeys() {
+        return Collections.unmodifiableCollection(items.keySet());
     }
 }

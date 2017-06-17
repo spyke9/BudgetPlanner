@@ -6,4 +6,6 @@ import java.time.LocalDate;
 
 public class SummaryRepository extends GenericRepository<LocalDate, Summary> {
 
+    LocalDate minDate;
+
 }

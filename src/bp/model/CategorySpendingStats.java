@@ -9,6 +9,16 @@ public class CategorySpendingStats implements IStatistics {
     private LocalDate periodEnd;
     private List<MonthlyExpensesType> spending;
 
+    public CategorySpendingStats() {
+    }
+
+    public CategorySpendingStats(CategoryType category, LocalDate periodBegin, LocalDate periodEnd, List<MonthlyExpensesType> spending) {
+        this.category = category;
+        this.periodBegin = periodBegin;
+        this.periodEnd = periodEnd;
+        this.spending = spending;
+    }
+
     public void setCategory(CategoryType category) {
         this.category = category;
     }
