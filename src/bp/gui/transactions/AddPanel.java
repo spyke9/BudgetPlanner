@@ -8,16 +8,24 @@ import java.awt.*;
  */
 public class AddPanel extends JPanel
 {
-    private DatePanel datePanel;
+
+      private LabelPanel labelPanel;
+      private ComponentPanel componentPanel;
+      private AddButtonPanel addButtonPanel;
 
 
     public AddPanel()
     {
-        datePanel=new DatePanel();
+        componentPanel=new ComponentPanel();
+          labelPanel = new LabelPanel();
+          addButtonPanel = new AddButtonPanel();
 
         setLayout(new BorderLayout());
 
-        add(datePanel,BorderLayout.NORTH);
+       // add(datePanel,BorderLayout.NORTH);
+       add(componentPanel,BorderLayout.EAST);
+        add(labelPanel,BorderLayout.WEST);
+        add(addButtonPanel,BorderLayout.SOUTH);
 
 
 

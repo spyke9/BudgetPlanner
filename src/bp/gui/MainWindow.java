@@ -1,6 +1,7 @@
 package bp.gui;
 
 import bp.gui.transactions.AddForm;
+import bp.gui.transactions.PieChart;
 import bp.gui.transactions.PlannerPanel;
 import bp.gui.transactions.TransactionsPanel;
 
@@ -42,6 +43,10 @@ public class MainWindow extends JFrame {
     {
         MainWindow window = new MainWindow();
         AddForm addForm=new AddForm();
+
+        PieChart demo = new PieChart("Comparison", "Which operating system are you using?");
+        demo.pack();
+        demo.setVisible(true);
 
     }
 
