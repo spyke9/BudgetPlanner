@@ -1,6 +1,8 @@
 package bp.services;
 
+import bp.model.CategoryExpensesType;
 import bp.model.CategoryType;
+import bp.model.MonthlyExpensesType;
 import bp.model.Summary;
 import bp.repository.SummaryRepository;
 
@@ -19,6 +21,13 @@ public class SummaryService {
         this.summaryRepository = summaryRepository;
     }
 
+    public void addSummary(Summary summary) {
+        if (summaryRepository.getMinDate() == null) {
+            summaryRepository.setMinDate(summary.getDate());
+        }
+        summaryRepository.addItem(summary.getDate(), summary);
+    }
+
     public Collection<Summary> getAllSummaries() {
         return summaryRepository.getAll();
     }
@@ -34,41 +43,35 @@ public class SummaryService {
     }
 
     public double calculatePrognosisPerCategory(CategoryType category, LocalDate date) {
-        LocalDate minDate = date;
-        Collection<LocalDate> keys = summaryRepository.getKeys();
-        double n = 0.0;
-        for (LocalDate d : keys) {
-            if (d.isBefore(minDate)) {
-                minDate = d;
-            }
-            if (d.isBefore(date)) {
-                n++;
-            }
-        }
+        double n = summaryRepository.getAll().size();
         if (n < 2.0) {
             return 0.0;
-        } else {
-            double min = 0.0;
-            double max = 0.0;
-            Summary minSummary = summaryRepository.getById(minDate);
-            Summary maxSummary = summaryRepository.getById(date.minusMonths(1));
-
-            if (minSummary != null) {
-                min = minSummary.getExpenses().get(category).getExpenses();
-            }
-            if (maxSummary != null) {
-                max = maxSummary.getExpenses().get(category).getExpenses();
-            }
-
-            return (max - min) / (n - 1.0);
         }
+        double min = 0.0, max = 0.0;
+        Summary minSummary = summaryRepository.getById(summaryRepository.getMinDate());
+        Summary maxSummary = summaryRepository.getById(date.minusMonths(1));
+
+        if (minSummary != null) {
+            min = minSummary.getExpenses().get(category).getExpenses();
+        }
+        if (maxSummary != null) {
+            max = maxSummary.getExpenses().get(category).getExpenses();
+        }
+
+        return (n * max - min) / (n - 1.0);
+        //metoda usredniania zwrotow x_{n+1} = x_n + S, S = (x_n - x_1) / (n - 1);
     }
 
     public Summary calculatePrognosis(LocalDate date) {
+        Summary summary = new Summary();
         for (CategoryType category : CategoryType.values()) {
-            calculatePrognosisPerCategory(category, date);
+            summary.addExpense(new CategoryExpensesType(date, category, calculatePrognosisPerCategory(category, date)));
         }
+        return summary;
+    }
 
+    public Summary pieChart(LocalDate date) {
+//
         return new Summary();
     }
 }
