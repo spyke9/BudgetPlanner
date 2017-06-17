@@ -1,7 +1,8 @@
-package services;
+package bp.services;
 
-import model.*;
-import repository.TransactionRepository;
+import bp.config.Configuration;
+import bp.model.*;
+import bp.repository.TransactionRepository;
 
 import java.time.LocalDate;
 
@@ -10,6 +11,15 @@ import java.time.LocalDate;
  */
 public class TransactionService {
     TransactionRepository transactionRepository = new TransactionRepository();
+
+    public TransactionService() {
+        try {
+            transactionRepository = (TransactionRepository) Serializer.deserialize(Configuration.TRANSACTION_REPOSITORY_FILE);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public TransactionRepository getTransactionRepository() {
         return transactionRepository;
@@ -68,5 +78,5 @@ public class TransactionService {
         return summary;
     }
 
-    
+
 }

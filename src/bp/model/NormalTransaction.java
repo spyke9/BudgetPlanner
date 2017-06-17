@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 /**
  * Created by szkutek on 12.06.17.

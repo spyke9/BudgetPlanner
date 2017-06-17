@@ -1,4 +1,4 @@
-package services;
+package bp.services;
 
 import java.io.*;
 
@@ -6,7 +6,7 @@ import java.io.*;
  * Created by szkutek on 12.06.17.
  */
 public class Serializer {
-    public static void serialize(Serializable item, String path) throws FileNotFoundException {
+    public static void serialize(Serializable item, String path) {
         try {
             FileOutputStream file = new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(file);

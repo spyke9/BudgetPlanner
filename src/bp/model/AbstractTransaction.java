@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

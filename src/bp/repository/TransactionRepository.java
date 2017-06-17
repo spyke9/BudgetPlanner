@@ -1,6 +1,6 @@
-package repository;
+package bp.repository;
 
-import model.ITransaction;
+import bp.model.ITransaction;
 
 import java.util.UUID;
 

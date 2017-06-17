@@ -1,6 +1,6 @@
-package repository;
+package bp.repository;
 
-import model.Summary;
+import bp.model.Summary;
 
 import java.time.LocalDate;
 

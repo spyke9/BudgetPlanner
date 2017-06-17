@@ -1,6 +1,8 @@
-import model.Summary;
-import repository.SummaryRepository;
-import services.Serializer;
+package bp.config;
+
+import bp.model.Summary;
+import bp.repository.SummaryRepository;
+import bp.services.Serializer;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;

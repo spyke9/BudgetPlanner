@@ -1,4 +1,4 @@
-package model;
+package bp.model;
 
 public class MonthlyExpensesAndIncomeType extends MonthlyExpensesType {
     private double income;
