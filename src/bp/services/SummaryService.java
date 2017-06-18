@@ -7,6 +7,7 @@ import com.sun.deploy.net.HttpRequest;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 /**
@@ -111,8 +112,13 @@ public class SummaryService {
         return res;
     }
 
-//    public List<MonthlyExpensesAndIncomeType> barGraph(int year) {
-//        for
-//    }
+    public List<MonthlyExpensesAndIncomeType> barGraph(int year) {
+        List<MonthlyExpensesAndIncomeType> monthlyExpensesAndIncomeList = new ArrayList<>();
+        for (Month month : Month.values()) {
+            Summary summary = summaryRepository.getById(LocalDate.of(year, month, 1));
+            monthlyExpensesAndIncomeList.add(summary.getExpensesAndIncome());
+        }
+        return monthlyExpensesAndIncomeList;
+    }
 
 }
