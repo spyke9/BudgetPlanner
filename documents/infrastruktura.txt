@@ -13,7 +13,7 @@ wyliczanie wydatków dla danej kategorii (Summary <- TransactionRepository)
 - zapis i odczyt TransactionRepository z pliku
 - zapis i odczyt SummaryRepository z pliku
 
-5. 
+5. OK
 obliczanie i rysowanie wykresów
 
 6. OK
@@ -25,5 +25,5 @@ prognozowanie wydatków dla BudgetPlanner
 8. OK
 wyświetlanie historii transakcji (z TransactionRepository)
 
-9. 
-aktualizowanie Summary w SummaryRepository, gdy zostanie dodana nowa transakcja
+9. OK
+"aktualizowanie" Summary w SummaryRepository, gdy zostanie dodana nowa transakcja

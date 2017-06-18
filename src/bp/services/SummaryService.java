@@ -1,11 +1,11 @@
 package bp.services;
 
-import bp.model.*;
+import bp.model.CategoryExpensesType;
+import bp.model.CategoryType;
+import bp.model.MonthlyExpensesAndIncomeType;
+import bp.model.Summary;
 import bp.repository.SummaryRepository;
-import com.sun.deploy.net.BasicHttpRequest;
-import com.sun.deploy.net.HttpRequest;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
