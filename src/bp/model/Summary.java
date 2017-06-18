@@ -6,17 +6,18 @@ import java.util.Map;
 
 public class Summary implements Serializable {
     private LocalDate date;
-    private Map<CategoryType, CategoryExpensesType> expenses;
-    private double income;
-    private MonthlyExpensesAndIncomeType monthlyExpensesAndIncomeType;
+    private Map<CategoryType, CategoryExpensesType> categoryExpensesMap;
+    private MonthlyExpensesAndIncomeType expensesAndIncome;
 
     public Summary() {
     }
 
-    public Summary(LocalDate date, double income) {
+    public Summary(LocalDate date, Map<CategoryType, CategoryExpensesType> expenses, MonthlyExpensesAndIncomeType expensesAndIncome) {
         this.date = date;
-        this.income = income;
+        this.categoryExpensesMap = expenses;
+        this.expensesAndIncome = expensesAndIncome;
     }
+
 
     public LocalDate getDate() {
         return date;
@@ -26,23 +27,23 @@ public class Summary implements Serializable {
         this.date = date;
     }
 
-    public Map<CategoryType, CategoryExpensesType> getExpenses() {
-        return expenses;
+    public Map<CategoryType, CategoryExpensesType> getCategoryExpensesMap() {
+        return categoryExpensesMap;
     }
 
-    public void setExpenses(Map<CategoryType, CategoryExpensesType> expenses) {
-        this.expenses = expenses;
+    public void setCategoryExpensesMap(Map<CategoryType, CategoryExpensesType> categoryExpensesMap) {
+        this.categoryExpensesMap = categoryExpensesMap;
     }
 
-    public double getIncome() {
-        return income;
+    public MonthlyExpensesAndIncomeType getExpensesAndIncome() {
+        return expensesAndIncome;
     }
 
-    public void setIncome(double income) {
-        this.income = income;
+    public void setExpensesAndIncome(MonthlyExpensesAndIncomeType expensesAndIncome) {
+        this.expensesAndIncome = expensesAndIncome;
     }
 
     public void addExpense(CategoryExpensesType categoryExpensesType) {
-        expenses.put(categoryExpensesType.getCategory(), categoryExpensesType);
+        categoryExpensesMap.put(categoryExpensesType.getCategory(), categoryExpensesType);
     }
 }

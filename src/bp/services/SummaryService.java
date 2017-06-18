@@ -2,7 +2,10 @@ package bp.services;
 
 import bp.model.*;
 import bp.repository.SummaryRepository;
+import com.sun.deploy.net.BasicHttpRequest;
+import com.sun.deploy.net.HttpRequest;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -42,26 +45,54 @@ public class SummaryService {
         if (n < 2.0) {
             return 0.0;
         }
-        double min = 0.0, max = 0.0;
-        Summary minSummary = summaryRepository.getById(summaryRepository.getMinDate());
-        Summary maxSummary = summaryRepository.getById(date.minusMonths(1));
+        double expense1 = 0.0, expenseN = 0.0;
+        Summary summary1 = summaryRepository.getById(summaryRepository.getMinDate());
+        Summary summaryN = summaryRepository.getById(date.minusMonths(1));
 
-        if (minSummary != null) {
-            min = minSummary.getExpenses().get(category).getExpenses();
+        if (summary1 != null) {
+            expense1 = summary1.getCategoryExpensesMap().get(category).getExpenses();
         }
-        if (maxSummary != null) {
-            max = maxSummary.getExpenses().get(category).getExpenses();
+        if (summaryN != null) {
+            expenseN = summaryN.getCategoryExpensesMap().get(category).getExpenses();
         }
-
-        return (n * max - min) / (n - 1.0);
+        return (n * expenseN - expense1) / (n - 1.0);
         //metoda usredniania zwrotow x_{n+1} = x_n + S, S = (x_n - x_1) / (n - 1);
     }
+
+    private MonthlyExpensesAndIncomeType calculatePrognosisOfIncomeAndExpense(LocalDate date) {
+        double n = summaryRepository.getAll().size();
+        if (n < 2.0) {
+            return new MonthlyExpensesAndIncomeType(date, 0.0, 0.0);
+        }
+
+        double income1 = 0.0, incomeN = 0.0;
+        double expense1 = 0.0, expenseN = 0.0;
+        Summary summary1 = summaryRepository.getById(summaryRepository.getMinDate());
+        Summary summaryN = summaryRepository.getById(date.minusMonths(1));
+
+        if (summary1 != null) {
+            expense1 = summary1.getExpensesAndIncome().getExpenses();
+            income1 = summary1.getExpensesAndIncome().getIncome();
+        }
+        if (summaryN != null) {
+            expenseN = summaryN.getExpensesAndIncome().getExpenses();
+            incomeN = summaryN.getExpensesAndIncome().getIncome();
+        }
+
+        return new MonthlyExpensesAndIncomeType(date,
+                (n * expenseN - expense1) / (n - 1.0),
+                (n * incomeN - income1) / (n - 1.0));
+        //metoda usredniania zwrotow x_{n+1} = x_n + S, S = (x_n - x_1) / (n - 1);
+    }
+
 
     public Summary calculatePrognosis(LocalDate date) {
         Summary summary = new Summary();
         for (CategoryType category : CategoryType.values()) {
-            summary.addExpense(new CategoryExpensesType(date, category, calculatePrognosisPerCategory(category, date)));
+            summary.addExpense(
+                    new CategoryExpensesType(date, category, calculatePrognosisPerCategory(category, date)));
         }
+        summary.setExpensesAndIncome(calculatePrognosisOfIncomeAndExpense(date));
         return summary;
     }
 
@@ -70,11 +101,11 @@ public class SummaryService {
         Map<CategoryType, Double> res = new HashMap<>();
         double sum = 0.0;
         for (CategoryType category : CategoryType.values()) {
-            double expensePerCategory = summaryChart.getExpenses().get(category).getExpenses();
+            double expensePerCategory = summaryChart.getCategoryExpensesMap().get(category).getExpenses();
             sum += expensePerCategory;
         }
         for (CategoryType category : CategoryType.values()) {
-            double expensePerCategory = summaryChart.getExpenses().get(category).getExpenses();
+            double expensePerCategory = summaryChart.getCategoryExpensesMap().get(category).getExpenses();
             res.put(category, expensePerCategory / sum);
         }
         return res;

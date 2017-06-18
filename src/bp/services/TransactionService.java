@@ -84,11 +84,16 @@ public class TransactionService {
     }
 
     public Summary summaryPerMonth(LocalDate date) {
-        Summary summary = new Summary(date, sumIncomingTransactionsFromMonth(date));
+        Summary summary = new Summary();
 
+        double expensePerMonth = 0.0;
         for (CategoryType category : CategoryType.values()) {
-            summary.addExpense(sumTransactionsPerCategory(date, category));
+            CategoryExpensesType tmp = sumTransactionsPerCategory(date, category);
+            summary.addExpense(tmp);
+            expensePerMonth += tmp.getExpenses();
         }
+        summary.setExpensesAndIncome(
+                new MonthlyExpensesAndIncomeType(date, expensePerMonth, sumIncomingTransactionsFromMonth(date)));
         return summary;
     }
 
