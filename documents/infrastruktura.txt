@@ -3,7 +3,7 @@
 - sumowanie transakcji wychodzących z poprzedniego miesiąca do wydatków (w tym powtarzających się - recurring)
 - sumowanie transakcji przychodzących z poprzedniego miesiąca do przychodów (w tym powtarzających się - recurring)
 
-2. 
+2. OK
 wyliczanie wydatków dla danej kategorii (CategorySpending <- TransactionRepository)
 
 3. OK
@@ -13,11 +13,17 @@ wyliczanie wydatków dla danej kategorii (Summary <- TransactionRepository)
 - zapis i odczyt TransactionRepository z pliku
 - zapis i odczyt SummaryRepository z pliku
 
-5. obliczanie i rysowanie wykresów
+5. 
+obliczanie i rysowanie wykresów
 
-6. CRUD na Summary w SummaryRepository
+6. OK
+CRUD na Summary w SummaryRepository
 
-7. prognozowanie wydatków dla BudgetPlanner
+7. OK
+prognozowanie wydatków dla BudgetPlanner
 
-8. 
+8. OK
 wyświetlanie historii transakcji (z TransactionRepository)
+
+9. 
+aktualizowanie Summary w SummaryRepository, gdy zostanie dodana nowa transakcja

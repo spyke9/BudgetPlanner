@@ -1,15 +1,10 @@
 package bp.services;
 
-import bp.model.CategoryExpensesType;
-import bp.model.CategoryType;
-import bp.model.MonthlyExpensesType;
-import bp.model.Summary;
+import bp.model.*;
 import bp.repository.SummaryRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by szkutek on 17.06.17.
@@ -42,7 +37,7 @@ public class SummaryService {
         return summaries;
     }
 
-    public double calculatePrognosisPerCategory(CategoryType category, LocalDate date) {
+    private double calculatePrognosisPerCategory(CategoryType category, LocalDate date) {
         double n = summaryRepository.getAll().size();
         if (n < 2.0) {
             return 0.0;
@@ -70,8 +65,23 @@ public class SummaryService {
         return summary;
     }
 
-    public Summary pieChart(LocalDate date) {
-//
-        return new Summary();
+    public Map<CategoryType, Double> pieChart(LocalDate date) {
+        Summary summaryChart = summaryRepository.getById(date);
+        Map<CategoryType, Double> res = new HashMap<>();
+        double sum = 0.0;
+        for (CategoryType category : CategoryType.values()) {
+            double expensePerCategory = summaryChart.getExpenses().get(category).getExpenses();
+            sum += expensePerCategory;
+        }
+        for (CategoryType category : CategoryType.values()) {
+            double expensePerCategory = summaryChart.getExpenses().get(category).getExpenses();
+            res.put(category, expensePerCategory / sum);
+        }
+        return res;
     }
+
+//    public List<MonthlyExpensesAndIncomeType> barGraph(int year) {
+//        for
+//    }
+
 }

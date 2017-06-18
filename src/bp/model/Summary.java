@@ -8,6 +8,7 @@ public class Summary implements Serializable {
     private LocalDate date;
     private Map<CategoryType, CategoryExpensesType> expenses;
     private double income;
+    private MonthlyExpensesAndIncomeType monthlyExpensesAndIncomeType;
 
     public Summary() {
     }
