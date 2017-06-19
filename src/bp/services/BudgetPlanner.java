@@ -1,4 +1,6 @@
-package bp.model;
+package bp.services;
+
+import bp.model.Summary;
 
 /**
  * Created by szkutek on 12.06.17.

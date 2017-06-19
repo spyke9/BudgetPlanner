@@ -3,7 +3,6 @@ package bp.services;
 import bp.model.*;
 import bp.repository.TransactionRepository;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class TransactionService {
         for (ITransaction transaction : transactionRepository.getAll()) {
             if (transaction.getDate().getYear() == date.getYear()
                     && transaction.getDate().getMonth() == date.getMonth()
-                    && transaction.getType() == AbstractTransaction.TransactionType.EXPENSE) {
+                    && transaction.getType() == Transaction.TransactionType.EXPENSE) {
                 sum += transaction.getAmount();
             }
         }
@@ -61,7 +60,7 @@ public class TransactionService {
         for (ITransaction transaction : transactionRepository.getAll()) {
             if (transaction.getDate().getYear() == date.getYear()
                     && transaction.getDate().getMonth() == date.getMonth()) {
-                if (transaction.getType() == AbstractTransaction.TransactionType.INCOME) {
+                if (transaction.getType() == Transaction.TransactionType.INCOME) {
                     sum += transaction.getAmount();
                 }
             }
@@ -75,7 +74,7 @@ public class TransactionService {
             if (transaction.getCategory() == category
                     && transaction.getDate().getYear() == date.getYear()
                     && transaction.getDate().getMonth() == date.getMonth()) {
-                if (transaction.getType() == AbstractTransaction.TransactionType.EXPENSE) {
+                if (transaction.getType() == Transaction.TransactionType.EXPENSE) {
                     sum += transaction.getAmount();
                 }
             }
@@ -103,7 +102,7 @@ public class TransactionService {
             if (transaction.getCategory() == category
                     && transaction.getDate().getYear() == date.getYear()
                     && transaction.getDate().getMonth() == date.getMonth()) {
-                if (transaction.getType() == AbstractTransaction.TransactionType.EXPENSE) {
+                if (transaction.getType() == Transaction.TransactionType.EXPENSE) {
                     sum += transaction.getAmount();
                 }
             }

@@ -3,10 +3,10 @@ package bp.model;
 import java.time.LocalDate;
 import java.util.List;
 
-public class CategorySpendingStats implements IStatistics {
+public class CategorySpendingStats {
     private CategoryType category;
-    private LocalDate periodBegin;
-    private LocalDate periodEnd;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
     private List<MonthlyExpensesType> spending;
 
     public CategorySpendingStats() {
@@ -14,8 +14,8 @@ public class CategorySpendingStats implements IStatistics {
 
     public CategorySpendingStats(CategoryType category, LocalDate periodBegin, LocalDate periodEnd, List<MonthlyExpensesType> spending) {
         this.category = category;
-        this.periodBegin = periodBegin;
-        this.periodEnd = periodEnd;
+        this.dateFrom = periodBegin;
+        this.dateTo = periodEnd;
         this.spending = spending;
     }
 
@@ -27,20 +27,20 @@ public class CategorySpendingStats implements IStatistics {
         return category;
     }
 
-    public void setPeriodBegin(LocalDate periodBegin) {
-        this.periodBegin = periodBegin;
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    public LocalDate getPeriodBegin() {
-        return periodBegin;
+    public LocalDate getDateFrom() {
+        return dateFrom;
     }
 
-    public void setPeriodEnd(LocalDate periodEnd) {
-        this.periodEnd = periodEnd;
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
     }
 
-    public LocalDate getPeriodEnd() {
-        return periodEnd;
+    public LocalDate getDateTo() {
+        return dateTo;
     }
 
     public void setSpending(List<MonthlyExpensesType> spending) {
@@ -51,14 +51,4 @@ public class CategorySpendingStats implements IStatistics {
         return spending;
     }
 
-
-    @Override
-    public void drawPlot() {
-
-    }
-
-    @Override
-    public double calculate() {
-        return 0;
-    }
 }

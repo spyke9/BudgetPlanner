@@ -7,7 +7,7 @@ import java.util.UUID;
 /**
  * Created by szkutek on 12.06.17.
  */
-public abstract class AbstractTransaction implements ITransaction {
+public abstract class Transaction implements ITransaction {
     private UUID id;
     private TransactionType type;
     private double amount;
@@ -15,24 +15,24 @@ public abstract class AbstractTransaction implements ITransaction {
     private CategoryType category;
 
     public enum TransactionType {
-        INCOME("I"), EXPENSE("E");
-        private String acronym;
+        INCOME("Income"), EXPENSE("Expense");
+        private String name;
 
-        TransactionType(String acronym) {
-            this.acronym = acronym;
+        TransactionType(String name) {
+            this.name = name;
         }
 
-        public static TransactionType fromAcronym(String acronym) {
+        public static TransactionType fromName(String name) {
             for (TransactionType t : TransactionType.values()) {
-                if (Objects.equals(t.acronym, acronym)) {
+                if (Objects.equals(t.name, name)) {
                     return t;
                 }
             }
             return null;
         }
 
-        public String getAcronym() {
-            return acronym;
+        public String getName() {
+            return name;
         }
     }
 
