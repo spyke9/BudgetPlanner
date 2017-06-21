@@ -1,4 +1,4 @@
-package bp.gui.transactions;
+package bp.gui.addform;
 import bp.model.AbstractTransaction;
 import bp.model.CategoryType;
 import javax.swing.*;

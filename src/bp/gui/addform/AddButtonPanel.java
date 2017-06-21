@@ -1,4 +1,4 @@
-package bp.gui.transactions;
+package bp.gui.addform;
 
 import javax.swing.*;
 import java.awt.*;
