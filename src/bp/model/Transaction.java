@@ -7,12 +7,24 @@ import java.util.UUID;
 /**
  * Created by szkutek on 12.06.17.
  */
-public abstract class Transaction implements ITransaction {
+public class Transaction implements ITransaction {
     private UUID id;
     private TransactionType type;
     private double amount;
     private LocalDateTime date;
     private CategoryType category;
+
+    public Transaction() {
+        this.id = UUID.randomUUID();
+    }
+
+    public Transaction(TransactionType type, double amount, LocalDateTime date, CategoryType category) {
+        this.id = UUID.randomUUID();
+        this.type = type;
+        this.amount = amount;
+        this.date = date;
+        this.category = category;
+    }
 
     public enum TransactionType {
         INCOME("Income"), EXPENSE("Expense");
@@ -38,10 +50,6 @@ public abstract class Transaction implements ITransaction {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public TransactionType getType() {

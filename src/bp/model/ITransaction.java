@@ -11,8 +11,6 @@ public interface ITransaction extends Serializable {
 
     UUID getId();
 
-    void setId(UUID id);
-
     Transaction.TransactionType getType();
 
     void setType(Transaction.TransactionType type);
