@@ -6,20 +6,17 @@ import java.awt.*;
 /**
  * Created by agnieszka on 17.06.2017.
  */
-public class SavePanel extends JPanel
-{
+public class SavePanel extends JPanel {
 
     private JButton saveButton;
 
-    public SavePanel()
-    {
+    public SavePanel() {
 
-        saveButton=new JButton("Save");
+        saveButton = new JButton("Save");
 
         setLayout(new BorderLayout());
 
-        this.add(saveButton,BorderLayout.SOUTH);
-
+        this.add(saveButton, BorderLayout.SOUTH);
 
 
     }

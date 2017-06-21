@@ -18,7 +18,7 @@ public class SummaryDataPanel extends JPanel {
         datetext1 = new JComboBox();
         datetext2 = new JComboBox();
 
-        setLayout(new GridLayout(1,8));
+        setLayout(new GridLayout(1, 8));
 
         add(new JLabel());
         add(new JLabel());

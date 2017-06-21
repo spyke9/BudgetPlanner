@@ -9,7 +9,7 @@ import javax.swing.*;
  */
 public class PieChartPanel extends JPanel {
 
-   private SummaryPieChart summaryPieChart;
+    private SummaryPieChart summaryPieChart;
 
 
     public PieChartPanel() {
@@ -17,8 +17,6 @@ public class PieChartPanel extends JPanel {
         summaryPieChart.setVisible(true);
 
         add(summaryPieChart);
-
-
 
 
     }

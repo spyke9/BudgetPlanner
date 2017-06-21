@@ -28,7 +28,7 @@ public class BarChart extends JPanel {
     public BarChart(String chartTitle) {
 
         CategoryDataset dataset = createdataset();
-        JFreeChart chart = createChart(dataset,chartTitle);
+        JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
 
@@ -84,8 +84,6 @@ public class BarChart extends JPanel {
         plot.setBackgroundPaint(Color.lightGray);
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
-
-
 
 
         return chart;

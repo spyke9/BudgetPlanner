@@ -6,21 +6,18 @@ import java.awt.*;
 /**
  * Created by agnieszka on 17.06.2017.
  */
-public class AddButtonPanel extends JPanel
-{
+public class AddButtonPanel extends JPanel {
     private JButton addbutton, cancelbutton;
 
-    public AddButtonPanel()
-    {
-        addbutton=new JButton("Add Transaction");
-        cancelbutton=new JButton("Cancel");
+    public AddButtonPanel() {
+        addbutton = new JButton("Add Transaction");
+        cancelbutton = new JButton("Cancel");
 
-        setLayout(new GridLayout(1,2));
+        setLayout(new GridLayout(1, 2));
         add(addbutton);
         add(cancelbutton);
 
     }
-
 
 
 }

@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 
         MainWindow window = new MainWindow();
 
-      //  AddForm addForm = new AddForm();
+        //  AddForm addForm = new AddForm();
 
 //        PieChart demo = new PieChart("Comparison", "Which operating system are you using?");
 //        demo.pack();

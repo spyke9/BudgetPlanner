@@ -6,19 +6,17 @@ import java.awt.*;
 /**
  * Created by agnieszka on 21.06.2017.
  */
-public class DateTextPanel extends JPanel{
+public class DateTextPanel extends JPanel {
 
-    private JTextField date1text,date2text;
+    private JTextField date1text, date2text;
 
 
-    public DateTextPanel()
-    {
-        date1text= new JTextField();
+    public DateTextPanel() {
+        date1text = new JTextField();
         date2text = new JTextField();
 
 
-
-        setLayout(new GridLayout(3,3));
+        setLayout(new GridLayout(3, 3));
 
         add(new JLabel());
 

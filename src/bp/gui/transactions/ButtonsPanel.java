@@ -6,21 +6,19 @@ import java.awt.*;
 /**
  * Created by agnieszka on 16.06.2017.
  */
-public class ButtonsPanel  extends JPanel{
+public class ButtonsPanel extends JPanel {
 
     //private TransactionRepository repository;
-    private JButton addbutton, deletebutton,modifybutton;
+    private JButton addbutton, deletebutton, modifybutton;
 
 
+    public ButtonsPanel() {
 
-    public ButtonsPanel()
-    {
-
-        addbutton=new JButton("Add Transaction");
-        deletebutton=new JButton("Delete Transaction");
+        addbutton = new JButton("Add Transaction");
+        deletebutton = new JButton("Delete Transaction");
         modifybutton = new JButton("Modify Transaction");
 
-        this.setLayout(new GridLayout(1,3));
+        this.setLayout(new GridLayout(1, 3));
         this.add(addbutton);
         this.add(modifybutton);
         this.add(deletebutton);

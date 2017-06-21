@@ -23,7 +23,7 @@ public class SummaryPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        add(summaryDataPanel,BorderLayout.NORTH);
+        add(summaryDataPanel, BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
 
 
