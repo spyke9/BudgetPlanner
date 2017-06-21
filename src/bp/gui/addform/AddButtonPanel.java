@@ -2,6 +2,8 @@ package bp.gui.addform;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by agnieszka on 17.06.2017.
@@ -17,7 +19,10 @@ public class AddButtonPanel extends JPanel {
         add(addbutton);
         add(cancelbutton);
 
+
+
+
     }
 
-
 }
+
