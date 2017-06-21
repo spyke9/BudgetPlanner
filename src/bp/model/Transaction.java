@@ -1,6 +1,6 @@
 package bp.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -11,14 +11,14 @@ public class Transaction implements ITransaction {
     private UUID id;
     private TransactionType type;
     private double amount;
-    private LocalDateTime date;
+    private LocalDate date;
     private CategoryType category;
 
     public Transaction() {
         this.id = UUID.randomUUID();
     }
 
-    public Transaction(TransactionType type, double amount, LocalDateTime date, CategoryType category) {
+    public Transaction(TransactionType type, double amount, LocalDate date, CategoryType category) {
         this.id = UUID.randomUUID();
         this.type = type;
         this.amount = amount;
@@ -68,11 +68,11 @@ public class Transaction implements ITransaction {
         this.amount = amount;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

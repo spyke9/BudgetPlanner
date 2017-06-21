@@ -1,7 +1,7 @@
 package bp.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 /**
@@ -19,9 +19,9 @@ public interface ITransaction extends Serializable {
 
     void setAmount(double amount);
 
-    LocalDateTime getDate();
+    LocalDate getDate();
 
-    void setDate(LocalDateTime date);
+    void setDate(LocalDate date);
 
     CategoryType getCategory();
 

@@ -4,7 +4,6 @@ import bp.model.*;
 import bp.repository.TransactionRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,7 +35,7 @@ public class TransactionService {
         return transactionRepository.getAll();
     }
 
-    public Collection<ITransaction> getTransactionsFromPeriod(LocalDateTime dateFrom, LocalDateTime dateTo) {
+    public Collection<ITransaction> getTransactionsFromPeriod(LocalDate dateFrom, LocalDate dateTo) {
         List<ITransaction> transactions = new ArrayList<>();
         for (ITransaction it : transactionRepository.getAll()) {
             if (it.getDate().isAfter(dateFrom) && it.getDate().isBefore(dateTo)) {
