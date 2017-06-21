@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by szkutek on 12.06.17.
@@ -21,12 +20,15 @@ public class TransactionService {
     }
 
     public void addTransaction(ITransaction transaction) {
-        transaction.setId(UUID.randomUUID());
         transactionRepository.addItem(transaction.getId(), transaction);
     }
 
-    public TransactionRepository getTransactionRepository() {
-        return transactionRepository;
+    public void updateTransaction(ITransaction transaction) {
+        transactionRepository.update(transaction.getId(), transaction);
+    }
+
+    public void deleteTransaction(ITransaction transaction) {
+        transactionRepository.update(transaction.getId(), transaction);
     }
 
     public Collection<ITransaction> getAllTransactions() {
