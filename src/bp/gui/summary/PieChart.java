@@ -1,21 +1,19 @@
-package bp.gui.transactions;
+package bp.gui.summary;
 
 import org.jfree.data.general.PieDataset;
 
 import javax.swing.*;
 
 
+import javax.swing.JFrame;
 
-        import javax.swing.JFrame;
-
-        import org.jfree.chart.ChartFactory;
-        import org.jfree.chart.ChartPanel;
-        import org.jfree.chart.JFreeChart;
-        import org.jfree.chart.plot.PiePlot3D;
-        import org.jfree.data.general.DefaultPieDataset;
-        import org.jfree.data.general.PieDataset;
-        import org.jfree.util.Rotation;
-
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
+import org.jfree.util.Rotation;
 
 
 public class PieChart extends JFrame {
@@ -40,7 +38,7 @@ public class PieChart extends JFrame {
     /**
      * Creates a sample dataset
      */
-    private  PieDataset createDataset() {
+    private PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
         result.setValue("Linux", 29);
         result.setValue("Mac", 20);
@@ -70,7 +68,5 @@ public class PieChart extends JFrame {
 
     }
 }
-
-
 
 

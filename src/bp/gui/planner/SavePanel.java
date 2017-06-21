@@ -1,4 +1,4 @@
-package bp.gui.transactions;
+package bp.gui.planner;
 
 import javax.swing.*;
 import java.awt.*;

@@ -22,9 +22,8 @@ public class ButtonsPanel  extends JPanel{
 
         this.setLayout(new GridLayout(1,3));
         this.add(addbutton);
-        this.add(deletebutton);
         this.add(modifybutton);
-
+        this.add(deletebutton);
 
 
     }

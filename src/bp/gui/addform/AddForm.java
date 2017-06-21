@@ -1,14 +1,8 @@
-package bp.gui.transactions;
+package bp.gui.addform;
 
 
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.*;
-import javax.swing.text.DefaultFormatter;
-import java.util.Properties;
 
 /**
  * Created by agnieszka on 17.06.2017.

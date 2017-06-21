@@ -9,6 +9,7 @@ public class TransactionsPanel extends JPanel
 
     private ButtonsPanel panel = new ButtonsPanel();
     private TransactionTable table = new TransactionTable();
+    private DatePanel datePanel = new DatePanel();
 
 
 
@@ -19,6 +20,7 @@ public class TransactionsPanel extends JPanel
 
         add(panel,BorderLayout.NORTH);
         add(table,BorderLayout.CENTER);
+        add(datePanel,BorderLayout.SOUTH);
 
     }
 }
