@@ -46,7 +46,6 @@ public class MainWindow extends JFrame {
 
         TransactionRepository transactionRepository = null;
         SummaryRepository summaryRepository = null;
-
         try {
             transactionRepository = (TransactionRepository) Serializer.deserialize(Configuration.TRANSACTION_REPOSITORY_FILE);
             summaryRepository = (SummaryRepository) Serializer.deserialize(Configuration.SUMMARY_REPOSITORY_FILE);
@@ -66,9 +65,6 @@ public class MainWindow extends JFrame {
         GraphService graphService = new GraphService(summaryRepository);
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
-//        repository.addItem(LocalDate.now(), new Summary());
-//        Serializer.serialize(repository, Configuration.SUMMARY_REPOSITORY_FILE);
-
 
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 
@@ -76,6 +72,5 @@ public class MainWindow extends JFrame {
         Serializer.serialize(summaryRepository, Configuration.SUMMARY_REPOSITORY_FILE);
 
     }
-
 
 }
