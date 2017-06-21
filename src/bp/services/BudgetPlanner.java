@@ -24,6 +24,11 @@ public class BudgetPlanner {
         this.estimatedBudget = calculatePrognosis(LocalDate.now());
     }
 
+    public void estimateMeanBudget() {
+        this.estimatedBudget = calculateMeanSummary(LocalDate.now());
+    }
+
+
     public Summary getEstimatedBudget() {
         return estimatedBudget;
     }
@@ -83,6 +88,37 @@ public class BudgetPlanner {
     }
 
 
+    private double calculateMeanExpensePerCategory(CategoryType category, LocalDate date) {
+        double sum = 0.0;
+        double n = 0.0;
+
+        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp.plusMonths(1)) {
+            Summary summary = summaryRepository.getById(tmp);
+            if (summary != null) {
+                sum += summary.getCategoryExpensesMap().get(category).getExpenses();
+                n++;
+            }
+        }
+        return sum / n;
+    }
+
+    private MonthlyExpensesAndIncomeType calculateMeanExpensesAndIncome(LocalDate date) {
+        double expense = 0.0;
+        double income = 0.0;
+        double n = 0.0;
+
+        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp.plusMonths(1)) {
+            Summary summary = summaryRepository.getById(tmp);
+            if (summary != null) {
+                expense += summary.getExpensesAndIncome().getExpenses();
+                income += summary.getExpensesAndIncome().getIncome();
+                n++;
+            }
+        }
+        return new MonthlyExpensesAndIncomeType(date, expense / n, income / n);
+    }
+
+
     private Summary calculatePrognosis(LocalDate date) {
         Summary summary = new Summary();
         for (CategoryType category : CategoryType.values()) {
@@ -92,5 +128,16 @@ public class BudgetPlanner {
         summary.setExpensesAndIncome(calculatePrognosisOfIncomeAndExpense(date));
         return summary;
     }
+
+    private Summary calculateMeanSummary(LocalDate date) {
+        Summary summary = new Summary();
+        for (CategoryType category : CategoryType.values()) {
+            summary.addExpense(
+                    new CategoryExpensesType(date, category, calculateMeanExpensePerCategory(category, date)));
+        }
+        summary.setExpensesAndIncome(calculateMeanExpensesAndIncome(date));
+        return summary;
+    }
+
 
 }
