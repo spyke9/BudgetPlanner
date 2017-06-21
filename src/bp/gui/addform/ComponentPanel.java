@@ -1,7 +1,9 @@
 package bp.gui.addform;
 
-import bp.model.AbstractTransaction;
+import bp.model.Transaction;
 import bp.model.CategoryType;
+import bp.model.ITransaction;
+import bp.model.Transaction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +25,7 @@ public class ComponentPanel extends JPanel {
 
         dateTextField = new JTextField();
         categorycombobox = new JComboBox(CategoryType.values());
-        typecombobox = new JComboBox(AbstractTransaction.TransactionType.values());
+        typecombobox = new JComboBox(Transaction.TransactionType.values());
         amountfield = new JTextField();
 
 
