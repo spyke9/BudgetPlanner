@@ -1,5 +1,8 @@
 package bp.gui.summary;
 
+import bp.model.CategoryType;
+import bp.model.MonthlyExpensesAndIncomeType;
+import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -19,14 +22,17 @@ import org.jfree.util.Rotation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * Created by agnieszka on 18.06.2017.
  */
 public class BarChart extends JPanel {
+    GraphService graphService;
 
-    public BarChart(String chartTitle) {
-
+    public BarChart(String chartTitle, GraphService graphService) {
+        this.graphService = graphService;
         CategoryDataset dataset = createdataset();
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -39,23 +45,13 @@ public class BarChart extends JPanel {
     private CategoryDataset createdataset() {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
-        result.addValue(1.0, "S1", "Category 1");
-        result.addValue(4.0, "S1", "Category 2");
-        result.addValue(3.0, "S1", "Category 3");
-        result.addValue(5.0, "S1", "Category 4");
-        result.addValue(5.0, "S1", "Category 5");
-        result.addValue(7.0, "S1", "Category 6");
-        result.addValue(7.0, "S1", "Category 7");
-        result.addValue(8.0, "S1", "Category 8");
+//        result.addValue(1.0, "S1", "Category 1");
+//        result.addValue(5.0, "S2", "Category 1");
+        List<MonthlyExpensesAndIncomeType> dataset = graphService.barGraph(LocalDate.now().getYear());
+        for (CategoryType category : CategoryType.values()) {
 
-        result.addValue(5.0, "S2", "Category 1");
-        result.addValue(7.0, "S2", "Category 2");
-        result.addValue(6.0, "S2", "Category 3");
-        result.addValue(8.0, "S2", "Category 4");
-        result.addValue(4.0, "S2", "Category 5");
-        result.addValue(4.0, "S2", "Category 6");
-        result.addValue(2.0, "S2", "Category 7");
-        result.addValue(1.0, "S2", "Category 8");
+        }
+
 
         return result;
 

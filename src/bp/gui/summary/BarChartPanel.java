@@ -1,5 +1,7 @@
 package bp.gui.summary;
 
+import bp.services.GraphService;
+
 import javax.swing.*;
 
 /**
@@ -8,9 +10,8 @@ import javax.swing.*;
 public class BarChartPanel extends JPanel {
     private BarChart barChart;
 
-
-    public BarChartPanel() {
-        barChart = new BarChart("Monthly expenses and incomes");
+    public BarChartPanel(GraphService graphService) {
+        barChart = new BarChart("Monthly expenses and income", graphService);
 
         add(barChart);
 

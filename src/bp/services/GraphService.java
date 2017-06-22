@@ -41,7 +41,9 @@ public class GraphService {
         List<MonthlyExpensesAndIncomeType> monthlyExpensesAndIncomeList = new ArrayList<>();
         for (Month month : Month.values()) {
             Summary summary = summaryRepository.getById(LocalDate.of(year, month, 1));
-            monthlyExpensesAndIncomeList.add(summary.getExpensesAndIncome());
+            if (summary != null) {
+                monthlyExpensesAndIncomeList.add(summary.getExpensesAndIncome());
+            }
         }
         return monthlyExpensesAndIncomeList;
     }

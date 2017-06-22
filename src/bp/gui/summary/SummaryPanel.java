@@ -21,7 +21,7 @@ public class SummaryPanel extends JPanel {
 
         pieChartPanel = new PieChartPanel(graphService);
         tabbedPane = new JTabbedPane();
-        barChart = new BarChartPanel();
+        barChart = new BarChartPanel(graphService);
         summaryDataPanel = new SummaryDataPanel();
 
         tabbedPane.add("Expenses by category", pieChartPanel);

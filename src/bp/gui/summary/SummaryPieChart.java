@@ -25,13 +25,13 @@ public class SummaryPieChart extends JPanel {
 
     public SummaryPieChart(String chartTitle, GraphService graphService) {
         this.graphService = graphService;
-        PieDataset dataset = createDataset(graphService);
+        PieDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
     }
 
-    private PieDataset createDataset(GraphService graphService) {
+    private PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
 
         Map<CategoryType, Double> dataset = graphService.pieChart(LocalDate.now().withDayOfMonth(1));
