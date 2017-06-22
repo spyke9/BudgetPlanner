@@ -1,5 +1,6 @@
 package bp.gui.summary;
 
+import bp.model.CategoryType;
 import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -12,6 +13,9 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.util.Rotation;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by agnieszka on 18.06.2017.
@@ -21,25 +25,26 @@ public class SummaryPieChart extends JPanel {
 
     public SummaryPieChart(String chartTitle, GraphService graphService) {
         this.graphService = graphService;
-        PieDataset dataset = createDataset();
+        PieDataset dataset = createDataset(graphService);
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
-
-
     }
 
-    private PieDataset createDataset() {
+    private PieDataset createDataset(GraphService graphService) {
         DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Food", 10);
-        result.setValue("Cos tam1", 40);
-        result.setValue("Cos tam2", 50);
+
+        Map<CategoryType, Double> dataset = graphService.pieChart(LocalDate.now());
+        for (CategoryType category : CategoryType.values()) {
+            result.setValue(category.name(), dataset.get(category));
+        }
+
         return result;
     }
 
-
     private JFreeChart createChart(PieDataset dataset, String title) {
         JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
+
         LegendTitle legend = chart.getLegend();
         legend.setPosition(RectangleEdge.RIGHT);
         PiePlot plot = (PiePlot) chart.getPlot();
@@ -47,8 +52,6 @@ public class SummaryPieChart extends JPanel {
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
         return chart;
-
-
     }
 
 
