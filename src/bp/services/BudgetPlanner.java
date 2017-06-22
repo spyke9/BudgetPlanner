@@ -120,7 +120,7 @@ public class BudgetPlanner {
 
 
     private Summary calculatePrognosis(LocalDate date) {
-        Summary summary = new Summary();
+        Summary summary = new Summary(date);
         for (CategoryType category : CategoryType.values()) {
             summary.addExpense(
                     new CategoryExpensesType(date, category, calculatePrognosisPerCategory(category, date)));
@@ -130,7 +130,7 @@ public class BudgetPlanner {
     }
 
     private Summary calculateMeanSummary(LocalDate date) {
-        Summary summary = new Summary();
+        Summary summary = new Summary(date);
         for (CategoryType category : CategoryType.values()) {
             summary.addExpense(
                     new CategoryExpensesType(date, category, calculateMeanExpensePerCategory(category, date)));

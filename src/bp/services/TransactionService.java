@@ -57,47 +57,6 @@ public class TransactionService {
         return sum;
     }
 
-    private double sumIncomingTransactionsFromMonth(LocalDate date) {
-        double sum = 0.0;
-        for (ITransaction transaction : transactionRepository.getAll()) {
-            if (transaction.getDate().getYear() == date.getYear()
-                    && transaction.getDate().getMonth() == date.getMonth()) {
-                if (transaction.getType() == Transaction.TransactionType.INCOME) {
-                    sum += transaction.getAmount();
-                }
-            }
-        }
-        return sum;
-    }
-
-    private CategoryExpensesType sumTransactionsPerCategory(LocalDate date, CategoryType category) {
-        double sum = 0.0;
-        for (ITransaction transaction : transactionRepository.getAll()) {
-            if (transaction.getCategory() == category
-                    && transaction.getDate().getYear() == date.getYear()
-                    && transaction.getDate().getMonth() == date.getMonth()) {
-                if (transaction.getType() == Transaction.TransactionType.EXPENSE) {
-                    sum += transaction.getAmount();
-                }
-            }
-        }
-        return new CategoryExpensesType(date, category, sum);
-    }
-
-    public Summary summaryPerMonth(LocalDate date) {
-        Summary summary = new Summary();
-
-        double expensePerMonth = 0.0;
-        for (CategoryType category : CategoryType.values()) {
-            CategoryExpensesType tmp = sumTransactionsPerCategory(date, category);
-            summary.addExpense(tmp);
-            expensePerMonth += tmp.getExpenses();
-        }
-        summary.setExpensesAndIncome(
-                new MonthlyExpensesAndIncomeType(date, expensePerMonth, sumIncomingTransactionsFromMonth(date)));
-        return summary;
-    }
-
     private MonthlyExpensesType sumTransactionsPerMonth(LocalDate date, CategoryType category) {
         double sum = 0.0;
         for (ITransaction transaction : transactionRepository.getAll()) {

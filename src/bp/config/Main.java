@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException {
         SummaryRepository repository = new SummaryRepository();
-        repository.addItem(LocalDate.now(), new Summary());
+        repository.addItem(LocalDate.now(), new Summary(LocalDate.now()));
 
         Serializer.serialize(repository, Configuration.SUMMARY_REPOSITORY_FILE);
         SummaryRepository deserialize = (SummaryRepository) Serializer.deserialize(Configuration.SUMMARY_REPOSITORY_FILE);

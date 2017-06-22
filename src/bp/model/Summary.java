@@ -2,6 +2,7 @@ package bp.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Summary implements Serializable {
@@ -9,7 +10,10 @@ public class Summary implements Serializable {
     private Map<CategoryType, CategoryExpensesType> categoryExpensesMap;
     private MonthlyExpensesAndIncomeType expensesAndIncome;
 
-    public Summary() {
+    public Summary(LocalDate date) {
+        this.date = date;
+        this.categoryExpensesMap = new HashMap<>();
+        this.expensesAndIncome = new MonthlyExpensesAndIncomeType();
     }
 
     public Summary(LocalDate date, Map<CategoryType, CategoryExpensesType> expenses, MonthlyExpensesAndIncomeType expensesAndIncome) {
