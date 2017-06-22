@@ -12,7 +12,7 @@ import java.util.List;
  * Created by szkutek on 17.06.17.
  */
 public class SummaryService {
-    SummaryRepository summaryRepository;
+    private SummaryRepository summaryRepository;
 
     public SummaryService(SummaryRepository summaryRepository) {
         this.summaryRepository = summaryRepository;

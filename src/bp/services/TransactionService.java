@@ -13,7 +13,7 @@ import java.util.UUID;
  * Created by szkutek on 12.06.17.
  */
 public class TransactionService {
-    TransactionRepository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     public TransactionService(TransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
@@ -57,7 +57,7 @@ public class TransactionService {
         return sum;
     }
 
-    public double sumIncomingTransactionsFromMonth(LocalDate date) {
+    private double sumIncomingTransactionsFromMonth(LocalDate date) {
         double sum = 0.0;
         for (ITransaction transaction : transactionRepository.getAll()) {
             if (transaction.getDate().getYear() == date.getYear()
@@ -70,7 +70,7 @@ public class TransactionService {
         return sum;
     }
 
-    public CategoryExpensesType sumTransactionsPerCategory(LocalDate date, CategoryType category) {
+    private CategoryExpensesType sumTransactionsPerCategory(LocalDate date, CategoryType category) {
         double sum = 0.0;
         for (ITransaction transaction : transactionRepository.getAll()) {
             if (transaction.getCategory() == category
@@ -98,7 +98,7 @@ public class TransactionService {
         return summary;
     }
 
-    public MonthlyExpensesType sumTransactionsPerMonth(LocalDate date, CategoryType category) {
+    private MonthlyExpensesType sumTransactionsPerMonth(LocalDate date, CategoryType category) {
         double sum = 0.0;
         for (ITransaction transaction : transactionRepository.getAll()) {
             if (transaction.getCategory() == category

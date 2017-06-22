@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by szkutek on 21.06.17.
  */
 public class GraphService {
-    SummaryRepository summaryRepository;
+    private SummaryRepository summaryRepository;
 
     public GraphService(SummaryRepository summaryRepository) {
         this.summaryRepository = summaryRepository;
