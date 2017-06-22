@@ -70,9 +70,9 @@ public class MainWindow extends JFrame {
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
 
-        Summary exampleSummary = new Summary(LocalDate.now());
+        Summary exampleSummary = new Summary(LocalDate.now().withDayOfMonth(1));
         for (CategoryType categoryType : CategoryType.values()) {
-            exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now(), categoryType, 1));
+            exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now().withDayOfMonth(1), categoryType, 1));
         }
         summaryService.addSummary(exampleSummary);
 

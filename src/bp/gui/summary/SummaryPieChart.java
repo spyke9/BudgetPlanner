@@ -34,9 +34,12 @@ public class SummaryPieChart extends JPanel {
     private PieDataset createDataset(GraphService graphService) {
         DefaultPieDataset result = new DefaultPieDataset();
 
-        Map<CategoryType, Double> dataset = graphService.pieChart(LocalDate.now());
+        Map<CategoryType, Double> dataset = graphService.pieChart(LocalDate.now().withDayOfMonth(1));
         for (CategoryType category : CategoryType.values()) {
-            result.setValue(category.name(), dataset.get(category));
+            double amount = dataset.get(category);
+//            String.format("%.2f", amount);
+//            + "\n" + String.format("%.2f", amount) + "%"
+            result.setValue(category.getName(), amount);
         }
 
         return result;
