@@ -1,5 +1,6 @@
 package bp.gui.summary;
 
+import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -16,8 +17,10 @@ import javax.swing.*;
  * Created by agnieszka on 18.06.2017.
  */
 public class SummaryPieChart extends JPanel {
+    private GraphService graphService;
 
-    public SummaryPieChart(String chartTitle) {
+    public SummaryPieChart(String chartTitle, GraphService graphService) {
+        this.graphService = graphService;
         PieDataset dataset = createDataset();
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);

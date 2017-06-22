@@ -20,10 +20,10 @@ public class MainWindow extends JFrame {
                       GraphService graphService,
                       BudgetPlanner budgetPlanner) {
 
-        TransactionsPanel transactionpanel = new TransactionsPanel();
+        TransactionsPanel transactionpanel = new TransactionsPanel(transactionService);
         PlannerPanel plannerPanel = new PlannerPanel();
         JTabbedPane table = new JTabbedPane();
-        SummaryPanel summaryPanel = new SummaryPanel();
+        SummaryPanel summaryPanel = new SummaryPanel(graphService);
 
 
         table.add("Transactions", transactionpanel);

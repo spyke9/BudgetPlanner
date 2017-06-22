@@ -1,6 +1,8 @@
 package bp.gui.summary;
 
 
+import bp.services.GraphService;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,25 +11,27 @@ import java.awt.*;
  */
 public class SummaryPanel extends JPanel {
 
-    private PieChartPanel pieChartPanel = new PieChartPanel();
-    private BarChartPanel barChart = new BarChartPanel();
-    private JTabbedPane tabbedPane = new JTabbedPane();
-    private SummaryDataPanel summaryDataPanel = new SummaryDataPanel();
+    private PieChartPanel pieChartPanel;
+    private BarChartPanel barChart;
+    private JTabbedPane tabbedPane;
+    private SummaryDataPanel summaryDataPanel;
 
 
-    public SummaryPanel() {
+    public SummaryPanel(GraphService graphService) {
+
+        pieChartPanel = new PieChartPanel(graphService);
+        tabbedPane = new JTabbedPane();
+        barChart = new BarChartPanel();
+        summaryDataPanel = new SummaryDataPanel();
 
         tabbedPane.add("Expenses by category", pieChartPanel);
         tabbedPane.add("Monthly expenses", barChart);
-
 
         setLayout(new BorderLayout());
 
         add(summaryDataPanel, BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
 
-
     }
-
 
 }
