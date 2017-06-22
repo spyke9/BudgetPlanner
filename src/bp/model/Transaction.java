@@ -1,6 +1,8 @@
 package bp.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,6 +47,19 @@ public class Transaction implements ITransaction {
 
         public String getName() {
             return name;
+        }
+
+        public static List<String>getNames()
+
+        {
+            List<String> transactionTypeList = new ArrayList<String>();
+
+            for (TransactionType t : TransactionType.values()) {
+
+                transactionTypeList.add(t.name);
+            }
+
+            return transactionTypeList;
         }
     }
 

@@ -59,6 +59,7 @@ public class AddForm extends JFrame implements ActionListener {
         mainpanel.add(componentPanel);
 
         categorycombobox.setModel(new DefaultComboBoxModel(CategoryType.getNames().toArray()));
+        typecombobox.setModel(new DefaultComboBoxModel(Transaction.TransactionType.getNames().toArray()));
 
 
 
