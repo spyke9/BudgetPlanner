@@ -13,7 +13,7 @@ public class Summary implements Serializable {
     public Summary(LocalDate date) {
         this.date = date;
         this.categoryExpensesMap = new HashMap<>();
-        this.expensesAndIncome = new MonthlyExpensesAndIncomeType();
+        this.expensesAndIncome = new MonthlyExpensesAndIncomeType(date);
     }
 
     public Summary(LocalDate date, Map<CategoryType, CategoryExpensesType> expenses, MonthlyExpensesAndIncomeType expensesAndIncome) {

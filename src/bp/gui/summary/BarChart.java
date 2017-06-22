@@ -2,28 +2,25 @@ package bp.gui.summary;
 
 import bp.model.CategoryType;
 import bp.model.MonthlyExpensesAndIncomeType;
+import bp.model.MonthlyExpensesType;
+import bp.model.Transaction;
 import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.XYBarDataset;
 import org.jfree.ui.RectangleEdge;
-import org.jfree.util.Rotation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.time.LocalDate;
-import java.util.Map;
 
 /**
  * Created by agnieszka on 18.06.2017.
@@ -37,8 +34,6 @@ public class BarChart extends JPanel {
         JFreeChart chart = createChart(dataset, chartTitle);
         ChartPanel chartPanel = new ChartPanel(chart);
         add(chartPanel);
-
-
     }
 
 
@@ -46,22 +41,20 @@ public class BarChart extends JPanel {
         DefaultCategoryDataset result = new DefaultCategoryDataset();
 
 //        result.addValue(1.0, "S1", "Category 1");
-//        result.addValue(5.0, "S2", "Category 1");
         List<MonthlyExpensesAndIncomeType> dataset = graphService.barGraph(LocalDate.now().getYear());
-        for (CategoryType category : CategoryType.values()) {
-
+//        dataset.sort(Comparator.comparing(MonthlyExpensesType::getDate));
+        for (MonthlyExpensesAndIncomeType item : dataset) {
+            result.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), item.getDate().getMonth());
+            result.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), item.getDate().getMonth());
         }
 
-
         return result;
-
     }
-
 
     private JFreeChart createChart(CategoryDataset dataset, String title) {
         JFreeChart chart = ChartFactory.createBarChart(
                 title,
-                "Month",
+                "Year",
                 "Amount",
                 dataset,
                 PlotOrientation.VERTICAL,

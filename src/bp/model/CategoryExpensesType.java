@@ -5,10 +5,13 @@ import java.time.LocalDate;
 public class CategoryExpensesType extends MonthlyExpensesType {
     private CategoryType category;
 
+    public CategoryExpensesType(LocalDate date, double expenses) {
+        super(date, expenses);
+    }
+
     public CategoryExpensesType(LocalDate date, CategoryType category, double expenses) {
-        this.setDate(date);
+        super(date, expenses);
         this.category = category;
-        this.setExpenses(expenses);
     }
 
     public CategoryType getCategory() {

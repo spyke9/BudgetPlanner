@@ -16,6 +16,8 @@ public class BudgetPlanner {
     private Summary estimatedBudget;
     private Summary plannedBudget;
 
+//    TODO sprawdzic czy plan nie zaklada wydania wiecej niz posiada uzytkownik
+
     public BudgetPlanner(SummaryRepository summaryRepository) {
         this.summaryRepository = summaryRepository;
     }

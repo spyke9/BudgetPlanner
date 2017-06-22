@@ -5,7 +5,8 @@ import java.time.LocalDate;
 public class MonthlyExpensesAndIncomeType extends MonthlyExpensesType {
     private double income;
 
-    public MonthlyExpensesAndIncomeType() {
+    public MonthlyExpensesAndIncomeType(LocalDate date) {
+        super(date);
     }
 
     public MonthlyExpensesAndIncomeType(LocalDate date, double expenses, double income) {
