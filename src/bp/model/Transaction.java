@@ -83,4 +83,15 @@ public class Transaction implements ITransaction {
     public void setCategory(CategoryType category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", type=" + type +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", category=" + category +
+                '}';
+    }
 }

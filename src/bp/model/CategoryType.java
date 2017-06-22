@@ -1,5 +1,7 @@
 package bp.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public enum CategoryType {
@@ -27,6 +29,20 @@ public enum CategoryType {
         }
         return null;
     }
+
+    public static List<String> getNames() {
+
+        List<String> categoryNames = new ArrayList<String>();
+
+        for (CategoryType categoryType : CategoryType.values()) {
+
+            categoryNames.add(categoryType.name);
+        }
+
+        return categoryNames;
+
+    }
+
 
     public String getName() {
         return name;

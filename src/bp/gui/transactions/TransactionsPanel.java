@@ -1,18 +1,27 @@
 package bp.gui.transactions;
 
+import bp.services.TransactionService;
+
 import javax.swing.*;
 import java.awt.*;
 
 
 public class TransactionsPanel extends JPanel {
 
-    private ButtonsPanel panel = new ButtonsPanel();
-    private TransactionTable table = new TransactionTable();
-    private DatePanel datePanel = new DatePanel();
+
+    TransactionService transactionService;
 
 
-    public TransactionsPanel() {
+    public TransactionsPanel(TransactionService transactionService) {
+
         super();
+        this.transactionService=transactionService;
+        ButtonsPanel panel = new ButtonsPanel(transactionService);
+        TransactionTable table = new TransactionTable();
+        DatePanel datePanel = new DatePanel();
+
+
+
 
         setLayout(new BorderLayout());
 

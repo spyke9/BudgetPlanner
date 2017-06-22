@@ -3,6 +3,7 @@ package bp.gui.transactions;
 import bp.gui.MainWindow;
 import bp.gui.addform.AddForm;
 import bp.model.Transaction;
+import bp.services.TransactionService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +17,12 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 
     //private TransactionRepository repository;
     private JButton addbutton, deletebutton, modifybutton;
+    TransactionService transactionService;
 
 
-    public ButtonsPanel() {
+    public ButtonsPanel(TransactionService transactionService) {
+
+        this.transactionService=transactionService;
 
         addbutton = new JButton("Add Transaction");
         deletebutton = new JButton("Delete Transaction");
@@ -43,8 +47,8 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 
         if (source == addbutton) {
             JFrame parent = new JFrame();
+            JDialog window = new JDialog(new AddForm(transactionService));
 
-            JDialog window = new JDialog(new AddForm());
 
         } else if (source == deletebutton) {
 
