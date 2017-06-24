@@ -6,6 +6,7 @@ import bp.gui.summary.SummaryPanel;
 import bp.gui.transactions.TransactionsPanel;
 import bp.model.CategoryExpensesType;
 import bp.model.CategoryType;
+import bp.model.MonthlyExpensesAndIncomeType;
 import bp.model.Summary;
 import bp.repository.SummaryRepository;
 import bp.repository.TransactionRepository;
@@ -72,8 +73,10 @@ public class MainWindow extends JFrame {
 
         Summary exampleSummary = new Summary(LocalDate.now().withDayOfMonth(1));
         for (CategoryType categoryType : CategoryType.values()) {
-            exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now().withDayOfMonth(1), categoryType, 1));
+            exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now(), categoryType, 1));
         }
+        exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now(), CategoryType.FOOD_AND_GROCERIES, 5));
+        exampleSummary.setExpensesAndIncome(new MonthlyExpensesAndIncomeType(LocalDate.now(), 10.0, 12.1));
         summaryService.addSummary(exampleSummary);
 
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);

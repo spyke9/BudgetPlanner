@@ -1,8 +1,6 @@
 package bp.gui.summary;
 
-import bp.model.CategoryType;
 import bp.model.MonthlyExpensesAndIncomeType;
-import bp.model.MonthlyExpensesType;
 import bp.model.Transaction;
 import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
@@ -17,10 +15,12 @@ import org.jfree.ui.RectangleEdge;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Collections;
-import java.util.Comparator;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Calendar;
 import java.util.List;
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * Created by agnieszka on 18.06.2017.
@@ -30,25 +30,24 @@ public class BarChart extends JPanel {
 
     public BarChart(String chartTitle, GraphService graphService) {
         this.graphService = graphService;
-        CategoryDataset dataset = createdataset();
-        JFreeChart chart = createChart(dataset, chartTitle);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        add(chartPanel);
+        add(new ChartPanel(createChart(createDataset(), chartTitle)));
     }
 
 
-    private CategoryDataset createdataset() {
-        DefaultCategoryDataset result = new DefaultCategoryDataset();
+    private CategoryDataset createDataset() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-//        result.addValue(1.0, "S1", "Category 1");
-        List<MonthlyExpensesAndIncomeType> dataset = graphService.barGraph(LocalDate.now().getYear());
+//        dataset.addValue(1.0, "S1", "Category 1");
+        List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(LocalDate.now().getYear());
 //        dataset.sort(Comparator.comparing(MonthlyExpensesType::getDate));
-        for (MonthlyExpensesAndIncomeType item : dataset) {
-            result.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), item.getDate().getMonth());
-            result.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), item.getDate().getMonth());
+        for (MonthlyExpensesAndIncomeType item : barGraphData) {
+//            String x = item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+            String x = item.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+            dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
+            dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
         }
 
-        return result;
+        return dataset;
     }
 
     private JFreeChart createChart(CategoryDataset dataset, String title) {

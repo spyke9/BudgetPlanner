@@ -5,6 +5,7 @@ import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
@@ -13,6 +14,7 @@ import org.jfree.ui.RectangleEdge;
 import org.jfree.util.Rotation;
 
 import javax.swing.*;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,21 +27,16 @@ public class SummaryPieChart extends JPanel {
 
     public SummaryPieChart(String chartTitle, GraphService graphService) {
         this.graphService = graphService;
-        PieDataset dataset = createDataset();
-        JFreeChart chart = createChart(dataset, chartTitle);
-        ChartPanel chartPanel = new ChartPanel(chart);
-        add(chartPanel);
+
+        add(new ChartPanel(createChart(createDataset(), chartTitle)));
     }
 
     private PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
 
-        Map<CategoryType, Double> dataset = graphService.pieChart(LocalDate.now().withDayOfMonth(1));
-        for (CategoryType category : CategoryType.values()) {
-            double amount = dataset.get(category);
-//            String.format("%.2f", amount);
-//            + "\n" + String.format("%.2f", amount) + "%"
-            result.setValue(category.getName(), amount);
+        Map<String, Double> pieChartData = graphService.pieChart(LocalDate.now());
+        for (String s : pieChartData.keySet()) {
+            result.setValue(s, pieChartData.get(s));
         }
 
         return result;
@@ -54,6 +51,14 @@ public class SummaryPieChart extends JPanel {
         plot.setStartAngle(290);
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
+
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+                "{1}PLN, {2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
+
+//        plot.setSimpleLabels(true);
+//        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+//                "{2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
+
         return chart;
     }
 
