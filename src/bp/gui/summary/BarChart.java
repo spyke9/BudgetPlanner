@@ -15,7 +15,6 @@ import org.jfree.ui.RectangleEdge;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.List;
 import java.util.Locale;
@@ -24,22 +23,29 @@ import java.util.Locale;
  * Created by agnieszka on 18.06.2017.
  */
 public class BarChart extends JPanel {
-    GraphService graphService;
+    private GraphService graphService;
+    private ChartPanel chartPanel;
 
-    public BarChart(String chartTitle, GraphService graphService) {
+    public BarChart(int year, GraphService graphService) {
         this.graphService = graphService;
-        add(new ChartPanel(createChart(createDataset(), chartTitle)));
+
+        chartPanel = new ChartPanel(updateChart(year));
+        add(chartPanel);
     }
 
+    public JFreeChart updateChart(int year) {
+        return createChart(createDataset(year), "Monthly expenses and income");
+    }
 
-    private CategoryDataset createDataset() {
+    private CategoryDataset createDataset(int year) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-        List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(LocalDate.now().getYear());
+        List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(year);
 //        dataset.sort(Comparator.comparing(MonthlyExpensesType::getDate));
         for (MonthlyExpensesAndIncomeType item : barGraphData) {
 //            String x = item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM"));
             String x = item.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+
             dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
             dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
         }
@@ -64,9 +70,10 @@ public class BarChart extends JPanel {
 
 
         return chart;
-
-
     }
 
+    public ChartPanel getChartPanel() {
+        return chartPanel;
+    }
 
 }

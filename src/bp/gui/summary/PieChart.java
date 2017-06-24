@@ -1,6 +1,5 @@
 package bp.gui.summary;
 
-import bp.model.CategoryType;
 import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -16,25 +15,33 @@ import org.jfree.util.Rotation;
 import javax.swing.*;
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by agnieszka on 18.06.2017.
  */
-public class SummaryPieChart extends JPanel {
+public class PieChart extends JPanel {
     private GraphService graphService;
+    private ChartPanel chartPanel;
+    private LocalDate date;
 
-    public SummaryPieChart(String chartTitle, GraphService graphService) {
+    public PieChart(LocalDate date, GraphService graphService) {
         this.graphService = graphService;
+        this.date = date;
 
-        add(new ChartPanel(createChart(createDataset(), chartTitle)));
+        chartPanel = new ChartPanel(updateChart(date));
+        add(chartPanel);
     }
 
-    private PieDataset createDataset() {
+    public JFreeChart updateChart(LocalDate date) {
+        this.date = date;
+        return createChart(createDataset(date), "Expenses by category");
+    }
+
+    private PieDataset createDataset(LocalDate date) {
         DefaultPieDataset result = new DefaultPieDataset();
 
-        Map<String, Double> pieChartData = graphService.pieChart(LocalDate.now());
+        Map<String, Double> pieChartData = graphService.pieChart(date);
         for (String s : pieChartData.keySet()) {
             result.setValue(s, pieChartData.get(s));
         }
@@ -62,5 +69,11 @@ public class SummaryPieChart extends JPanel {
         return chart;
     }
 
+    public ChartPanel getChartPanel() {
+        return chartPanel;
+    }
 
+    public LocalDate getDate() {
+        return date;
+    }
 }

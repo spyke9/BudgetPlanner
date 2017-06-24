@@ -12,25 +12,26 @@ import java.awt.*;
  */
 public class SummaryPanel extends JPanel {
 
-    private PieChartPanel pieChartPanel;
+    private PieChartPanel pieChart;
     private BarChartPanel barChart;
     private JTabbedPane tabbedPane;
-    private SummaryDataPanel summaryDataPanel;
+//    private SummaryDataPanel summaryDataPanel;
 
 
     public SummaryPanel(SummaryService summaryService, GraphService graphService) {
 
-        pieChartPanel = new PieChartPanel(graphService);
-        tabbedPane = new JTabbedPane();
-        barChart = new BarChartPanel(graphService);
-        summaryDataPanel = new SummaryDataPanel(summaryService);
+//        summaryDataPanel = new SummaryDataPanel(summaryService);
 
-        tabbedPane.add("Expenses by category", pieChartPanel);
+        barChart = new BarChartPanel(summaryService, graphService);
+        pieChart = new PieChartPanel(summaryService, graphService);
+
+        tabbedPane = new JTabbedPane();
         tabbedPane.add("Monthly expenses", barChart);
+        tabbedPane.add("Expenses by category", pieChart);
 
         setLayout(new BorderLayout());
 
-        add(summaryDataPanel, BorderLayout.NORTH);
+//        add(summaryDataPanel, BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
 
     }

@@ -14,6 +14,7 @@ import bp.services.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
+import java.util.Random;
 
 /**
  * Created by agnieszka on 16.06.2017.
@@ -70,15 +71,17 @@ public class MainWindow extends JFrame {
         GraphService graphService = new GraphService(summaryRepository);
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
-
-        Summary exampleSummary = new Summary(LocalDate.now().withDayOfMonth(1));
-        for (CategoryType categoryType : CategoryType.values()) {
-            exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now(), categoryType, 1));
+        Random random = new Random();
+        for (int i = 1; i < 5; i++) {
+            LocalDate date = LocalDate.of(2010 + i, random.nextInt(11) + 1, 1);
+            Summary exampleSummary = new Summary(date);
+            for (CategoryType categoryType : CategoryType.values()) {
+                exampleSummary.addExpense(new CategoryExpensesType(date, categoryType, random.nextInt(100)));
+            }
+            exampleSummary.setExpensesAndIncome(
+                    new MonthlyExpensesAndIncomeType(LocalDate.now(), random.nextInt(1000), random.nextInt(1000)));
+            summaryService.addSummary(exampleSummary);
         }
-        exampleSummary.addExpense(new CategoryExpensesType(LocalDate.now(), CategoryType.FOOD_AND_GROCERIES, 5));
-        exampleSummary.setExpensesAndIncome(new MonthlyExpensesAndIncomeType(LocalDate.now(), 10.0, 12.1));
-        summaryService.addSummary(exampleSummary);
-
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 
         Serializer.serialize(transactionRepository, Configuration.TRANSACTION_REPOSITORY_FILE);
