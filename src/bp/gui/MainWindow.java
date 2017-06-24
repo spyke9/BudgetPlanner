@@ -28,7 +28,7 @@ public class MainWindow extends JFrame {
         TransactionsPanel transactionpanel = new TransactionsPanel(transactionService);
         PlannerPanel plannerPanel = new PlannerPanel();
         JTabbedPane table = new JTabbedPane();
-        SummaryPanel summaryPanel = new SummaryPanel(graphService);
+        SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
 
 
         table.add("Transactions", transactionpanel);

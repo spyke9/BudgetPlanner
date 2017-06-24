@@ -15,11 +15,9 @@ import org.jfree.ui.RectangleEdge;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.Calendar;
-import java.util.List;
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -37,7 +35,6 @@ public class BarChart extends JPanel {
     private CategoryDataset createDataset() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
-//        dataset.addValue(1.0, "S1", "Category 1");
         List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(LocalDate.now().getYear());
 //        dataset.sort(Comparator.comparing(MonthlyExpensesType::getDate));
         for (MonthlyExpensesAndIncomeType item : barGraphData) {
@@ -52,22 +49,14 @@ public class BarChart extends JPanel {
 
     private JFreeChart createChart(CategoryDataset dataset, String title) {
         JFreeChart chart = ChartFactory.createBarChart(
-                title,
-                "Year",
-                "Amount",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
-        );
+                title, "Month", "Amount", dataset,
+                PlotOrientation.VERTICAL, true, true, false);
 
         LegendTitle legend = chart.getLegend();
         legend.setPosition(RectangleEdge.RIGHT);
 
         chart.setBackgroundPaint(Color.white);
 
-        // get a reference to the plot for further customisation...
         CategoryPlot plot = chart.getCategoryPlot();
         plot.setBackgroundPaint(Color.lightGray);
         plot.setDomainGridlinePaint(Color.white);
