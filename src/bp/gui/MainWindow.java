@@ -33,12 +33,12 @@ public class MainWindow extends JFrame {
         TransactionsPanel transactionsPanel = new TransactionsPanel(transactionService);
         PlannerPanel plannerPanel = new PlannerPanel();
         JTabbedPane table = new JTabbedPane();
-       // SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
+        SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
 
 
         table.add("Transactions", transactionsPanel);
         table.add("Planner", plannerPanel);
-        //table.add("Summary", summaryPanel);
+        table.add("Summary", summaryPanel);
 
         this.setTitle("BudgetPlanner");
         this.setLocationRelativeTo(null);

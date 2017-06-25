@@ -4,6 +4,7 @@ import bp.model.ITransaction;
 import bp.services.TransactionService;
 
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -23,18 +24,6 @@ public class AbstractTableModel extends javax.swing.table.AbstractTableModel {
         this.transactionService = transactionService;
         collection = transactionService.getAllTransactions();
         columnNames = new String[]{"Date", "Category", "Type", "Amount", "jdsjsn"};
-//        data = new Object[][]{
-//                {"Mary", "Campione", "Snowboarding", new Integer(5),
-//                        new Boolean(false)},
-//                {"Alison", "Huml", "Rowing", new Integer(3), new Boolean(true)},
-//                {"Kathy", "Walrath", "Knitting", new Integer(2),
-//                        new Boolean(false)},
-//                {"Sharon", "Zakhour", "Speed reading", new Integer(20),
-//                        new Boolean(true)},
-//                {"Philip", "Milne", "Pool", new Integer(10),
-//                        new Boolean(false)}};
-
-        data = new Object[collection.size()][4];
         update();
 
 
@@ -59,6 +48,21 @@ public class AbstractTableModel extends javax.swing.table.AbstractTableModel {
 
     public void update() {
         collection = transactionService.getAllTransactions();
+        data = new Object[collection.size()][4];
+        transformData();
+
+        this.fireTableDataChanged();
+    }
+
+    public void update(LocalDate date1, LocalDate date2) {
+        collection = transactionService.getTransactionsFromPeriod(date1, date2);
+        data = new Object[collection.size()][4];
+        transformData();
+
+        this.fireTableDataChanged();
+    }
+
+    public void transformData(){
         int i = 0;
 
         for (ITransaction iTransaction : collection) {
@@ -69,8 +73,6 @@ public class AbstractTableModel extends javax.swing.table.AbstractTableModel {
             i++;
 
         }
-
-        this.fireTableDataChanged();
     }
 
 

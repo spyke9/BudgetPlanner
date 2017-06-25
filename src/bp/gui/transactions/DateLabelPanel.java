@@ -15,7 +15,7 @@ public class DateLabelPanel extends JPanel {
         date1 = new JLabel("From:");
         date2 = new JLabel("To:");
 
-        setLayout(new GridLayout(3, 1));
+        setLayout(new GridLayout(4, 1));
 
 
         add(name);
