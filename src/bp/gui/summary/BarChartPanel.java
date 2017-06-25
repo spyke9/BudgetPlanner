@@ -61,12 +61,14 @@ public class BarChartPanel extends JPanel {
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {
             String chosenYearStr = (String) jComboBox.getSelectedItem();
-            int year = Integer.parseInt(chosenYearStr);
+            if (chosenYearStr != null) {
+                int year = Integer.parseInt(chosenYearStr);
+                barChart.getChartPanel().setChart(barChart.updateChart(year));
 
-            barChart.getChartPanel().setChart(barChart.updateChart(year));
+                validate();
+                repaint();
+            }
 
-            validate();
-            repaint();
         });
 
         return jComboBox;

@@ -5,10 +5,7 @@ import bp.gui.planner.PlannerPanel;
 import bp.gui.summary.SummaryPanel;
 import bp.gui.transactions.AbstractTableModel;
 import bp.gui.transactions.TransactionsPanel;
-import bp.model.CategoryExpensesType;
-import bp.model.CategoryType;
-import bp.model.MonthlyExpensesAndIncomeType;
-import bp.model.Summary;
+import bp.model.*;
 import bp.repository.SummaryRepository;
 import bp.repository.TransactionRepository;
 import bp.services.*;
@@ -17,6 +14,7 @@ import javax.swing.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -108,37 +106,43 @@ public class MainWindow extends JFrame {
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
         Random random = new Random();
-        for (int i = 2010; i < 2016; i++) {
-            LocalDate date1 = LocalDate.of(i, 2, 1);
-            LocalDate date2 = LocalDate.of(i, 3, 1);
-            Summary exampleSummary1 = new Summary(date1);
-            Summary exampleSummary2 = new Summary(date2);
+//        for (int i = 2010; i < 2016; i++) {
+//            LocalDate date1 = LocalDate.of(i, 2, 1);
+//            LocalDate date2 = LocalDate.of(i, 3, 1);
+//            Summary exampleSummary1 = new Summary(date1);
+//            Summary exampleSummary2 = new Summary(date2);
+//
+//            for (CategoryType categoryType : CategoryType.values()) {
+//                exampleSummary1.addExpense(new CategoryExpensesType(date1, categoryType, random.nextInt(100)));
+//                exampleSummary2.addExpense(new CategoryExpensesType(date2, categoryType, random.nextInt(100)));
+//            }
+//            exampleSummary1.setExpensesAndIncome(
+//                    new MonthlyExpensesAndIncomeType(date1, random.nextInt(1000), random.nextInt(1000)));
+//            exampleSummary2.setExpensesAndIncome(
+//                    new MonthlyExpensesAndIncomeType(date2, random.nextInt(1000), random.nextInt(1000)));
+//
+//            summaryService.addSummary(exampleSummary1);
+//            summaryService.addSummary(exampleSummary2);
+//        }
 
-            for (CategoryType categoryType : CategoryType.values()) {
-                exampleSummary1.addExpense(new CategoryExpensesType(date1, categoryType, random.nextInt(100)));
-                exampleSummary2.addExpense(new CategoryExpensesType(date2, categoryType, random.nextInt(100)));
+        for (int y = 2010; y < 2017; y++) {
+            for (int m = 1; m <= 12; m++) {
+                for (int d = 1; d < 28; d++) {
+                    LocalDate date = LocalDate.of(y, m, d);
+                    CategoryType[] categoryTypeList = CategoryType.values();
+                    int rCat = random.nextInt(categoryTypeList.length);
+
+                    Transaction transaction = new Transaction();
+                    transaction.setDate(date);
+                    transaction.setCategory(categoryTypeList[rCat]);
+                    transaction.setType(Transaction.TransactionType.EXPENSE);
+                    transaction.setAmount(random.nextInt(100) + random.nextDouble());
+
+                    transactionService.addTransaction(transaction);
+
+                }
             }
-            exampleSummary1.setExpensesAndIncome(
-                    new MonthlyExpensesAndIncomeType(date1, random.nextInt(1000), random.nextInt(1000)));
-            exampleSummary2.setExpensesAndIncome(
-                    new MonthlyExpensesAndIncomeType(date2, random.nextInt(1000), random.nextInt(1000)));
-
-            summaryService.addSummary(exampleSummary1);
-            summaryService.addSummary(exampleSummary2);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 
