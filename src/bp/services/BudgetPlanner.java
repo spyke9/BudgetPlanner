@@ -102,7 +102,7 @@ public class BudgetPlanner {
             }
         }
         return sum / n;
-    }
+      }
 
     private MonthlyExpensesAndIncomeType calculateMeanExpensesAndIncome(LocalDate date) {
         double expense = 0.0;

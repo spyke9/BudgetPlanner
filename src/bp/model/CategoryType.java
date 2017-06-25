@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public enum CategoryType {
-    FOOD_AND_GROCERIES("Food and groceries"),
+    FOOD_AND_GROCERIES("Food"),
     HOUSING("Housing"),
     UTILITIES("Utilities"),
     HEALTH_CARE("Health care"),

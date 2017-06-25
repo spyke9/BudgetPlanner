@@ -1,6 +1,7 @@
 package bp.gui.addform;
 
 
+import bp.gui.transactions.AbstractTableModel;
 import bp.model.CategoryType;
 import bp.model.Transaction;
 import bp.services.TransactionService;
@@ -32,14 +33,14 @@ public class AddForm extends JFrame implements ActionListener {
     private JComboBox categorycombobox = new JComboBox();
     private JComboBox typecombobox = new JComboBox();
     private LabelPanel labelPanel = new LabelPanel();
-    private JTextField amountfield = new JTextField();
+    private JTextField amountfield = new JTextField("0.0");
     TransactionService transactionService;
+    private AbstractTableModel tableModel;
 
 
+    public AddForm(TransactionService transactionService, AbstractTableModel abstractTableModel) {
 
-    public AddForm(TransactionService transactionService) {
-
-
+        this.tableModel = abstractTableModel;
         this.transactionService = transactionService;
 
         buttonpanel.setLayout(new GridLayout(1, 2));
@@ -60,13 +61,6 @@ public class AddForm extends JFrame implements ActionListener {
 
         categorycombobox.setModel(new DefaultComboBoxModel(CategoryType.getNames().toArray()));
         typecombobox.setModel(new DefaultComboBoxModel(Transaction.TransactionType.getNames().toArray()));
-
-
-
-
-
-
-
 
         setLayout(new BorderLayout());
 
@@ -111,9 +105,10 @@ public class AddForm extends JFrame implements ActionListener {
 
             System.out.println(transaction);
             transactionService.addTransaction(transaction);
+            tableModel.update();
 
 
-            //this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
 
 

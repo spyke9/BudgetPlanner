@@ -18,11 +18,14 @@ public class ButtonsPanel extends JPanel implements ActionListener {
     //private TransactionRepository repository;
     private JButton addbutton, deletebutton, modifybutton;
     TransactionService transactionService;
+    AbstractTableModel tableModel;
 
 
-    public ButtonsPanel(TransactionService transactionService) {
+    public ButtonsPanel(TransactionService transactionService,AbstractTableModel abstractTableModel) {
+
 
         this.transactionService=transactionService;
+        this.tableModel=abstractTableModel;
 
         addbutton = new JButton("Add Transaction");
         deletebutton = new JButton("Delete Transaction");
@@ -47,7 +50,7 @@ public class ButtonsPanel extends JPanel implements ActionListener {
 
         if (source == addbutton) {
             JFrame parent = new JFrame();
-            JDialog window = new JDialog(new AddForm(transactionService));
+            JDialog window = new JDialog(new AddForm(transactionService,tableModel));
 
 
         } else if (source == deletebutton) {
