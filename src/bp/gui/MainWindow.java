@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
                       BudgetPlanner budgetPlanner) {
 
         TransactionsPanel transactionsPanel = new TransactionsPanel(transactionService);
-        PlannerPanel plannerPanel = new PlannerPanel();
+        PlannerPanel plannerPanel = new PlannerPanel(budgetPlanner);
         JTabbedPane table = new JTabbedPane();
         SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
 
