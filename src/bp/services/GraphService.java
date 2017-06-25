@@ -1,5 +1,6 @@
 package bp.services;
 
+import bp.model.CategoryExpensesType;
 import bp.model.CategoryType;
 import bp.model.MonthlyExpensesAndIncomeType;
 import bp.model.Summary;
@@ -26,9 +27,14 @@ public class GraphService {
         Summary summaryChart = summaryRepository.getById(date.withDayOfMonth(1));
         Map<String, Double> res = new HashMap<>();
 
-        for (CategoryType category : CategoryType.values()) {
-            double expensePerCategory = summaryChart.getCategoryExpensesMap().get(category).getExpenses();
-            res.put(category.getName(), expensePerCategory);
+        if (summaryChart != null) {
+            for (CategoryType category : CategoryType.values()) {
+                CategoryExpensesType categoryExpensesType = summaryChart.getCategoryExpensesMap().get(category);
+                if (categoryExpensesType != null) {
+                    double expensePerCategory = categoryExpensesType.getExpenses();
+                    res.put(category.getName(), expensePerCategory);
+                }
+            }
         }
         return res;
     }

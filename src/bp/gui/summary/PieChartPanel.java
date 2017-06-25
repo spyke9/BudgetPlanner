@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +69,11 @@ public class PieChartPanel extends JPanel {
     private JComboBox createYearComboBox() {
         List<String> labels = new ArrayList<>();
         int now = LocalDate.now().getYear();
-        for (int year = summaryService.getMinDate().getYear(); year <= now; year++) {
-            labels.add(String.valueOf(year));
+        LocalDate minDate = summaryService.getMinDate();
+        if (minDate != null) {
+            for (int year = now; year > minDate.getYear(); year--) {
+                labels.add(String.valueOf(year));
+            }
         }
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {
@@ -90,28 +94,21 @@ public class PieChartPanel extends JPanel {
 
     private JComboBox createMonthComboBox() {
         List<String> labels = new ArrayList<>();
-        LocalDate date1 = LocalDate.of(2000, 1, 1);
-        LocalDate date2 = LocalDate.of(2001, 1, 1);
-//        for (int i = 0; i < 12; i++) {
-
-        for (; date1.isBefore(date2); date1 = date1.plusMonths(1)) {
-            labels.add(date1.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
-//            System.out.println(date1.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
+        for (Month month : Month.values()) {
+            labels.add(month.getDisplayName(TextStyle.FULL, Locale.getDefault()));
         }
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
-//        JComboBox jComboBox = new JComboBox(java.time.Month.values());
-//        jComboBox.addActionListener(e -> {
-//            String chosenMonthStr = (String) jComboBox.getSelectedItem();
-//            System.out.println(chosenMonthStr);
-////TODO naprawić
-//            int month = Month.parseMonth(chosenMonthStr).getMonth();
-//
-//            LocalDate date = LocalDate.of(pieChart.getDate().getYear(), month, 1);
-//            pieChart.getChartPanel().setChart(pieChart.updateChart(date));
-//
-//            validate();
-//            repaint();
-//        });
+        jComboBox.addActionListener(e -> {
+            String chosenMonthStr = (String) jComboBox.getSelectedItem();
+            System.out.println(chosenMonthStr);
+            Month month = Month.valueOf(chosenMonthStr.toUpperCase());
+
+            LocalDate date = LocalDate.of(pieChart.getDate().getYear(), month, 1);
+            pieChart.getChartPanel().setChart(pieChart.updateChart(date));
+
+            validate();
+            repaint();
+        });
 
         return jComboBox;
     }

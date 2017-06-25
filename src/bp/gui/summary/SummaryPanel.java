@@ -15,13 +15,8 @@ public class SummaryPanel extends JPanel {
     private PieChartPanel pieChart;
     private BarChartPanel barChart;
     private JTabbedPane tabbedPane;
-//    private SummaryDataPanel summaryDataPanel;
-
 
     public SummaryPanel(SummaryService summaryService, GraphService graphService) {
-
-//        summaryDataPanel = new SummaryDataPanel(summaryService);
-
         barChart = new BarChartPanel(summaryService, graphService);
         pieChart = new PieChartPanel(summaryService, graphService);
 
@@ -30,8 +25,6 @@ public class SummaryPanel extends JPanel {
         tabbedPane.add("Expenses by category", pieChart);
 
         setLayout(new BorderLayout());
-
-//        add(summaryDataPanel, BorderLayout.NORTH);
         add(tabbedPane, BorderLayout.CENTER);
 
     }

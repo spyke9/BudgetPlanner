@@ -38,7 +38,7 @@ public class TransactionService {
     public Collection<ITransaction> getTransactionsFromPeriod(LocalDate dateFrom, LocalDate dateTo) {
         List<ITransaction> transactions = new ArrayList<>();
         for (ITransaction it : transactionRepository.getAll()) {
-            if (it.getDate().isAfter(dateFrom) && it.getDate().isBefore(dateTo)) {
+            if (it.getDate().isAfter(dateFrom.minusDays(1)) && it.getDate().isBefore(dateTo.plusDays(1))) {
                 transactions.add(it);
             }
         }

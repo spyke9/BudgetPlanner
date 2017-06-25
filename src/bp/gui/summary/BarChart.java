@@ -41,13 +41,12 @@ public class BarChart extends JPanel {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
         List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(year);
-//        dataset.sort(Comparator.comparing(MonthlyExpensesType::getDate));
-        for (MonthlyExpensesAndIncomeType item : barGraphData) {
-//            String x = item.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-            String x = item.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
-
-            dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
-            dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
+        if (barGraphData != null) {
+            for (MonthlyExpensesAndIncomeType item : barGraphData) {
+                String x = item.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+                dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
+                dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
+            }
         }
 
         return dataset;
