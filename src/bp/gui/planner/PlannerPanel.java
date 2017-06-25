@@ -45,7 +45,6 @@ public class PlannerPanel extends JPanel {
 
 
         public Categorytable(BudgetPlanner budgetPlanner) {
-
             this.budgetPlanner = budgetPlanner;
             model1 = new DefaultTableModel(name1, 9);
             category = new JTable(model1);
@@ -53,14 +52,14 @@ public class PlannerPanel extends JPanel {
             plan = new JTable(model2);
             DefaultTableModel model3 = new DefaultTableModel(name3, 20);
             spend = new JTable(model3);
-
+            transformCategoryData();
+            transformSpendData();
 
             this.setLayout(new GridLayout(1, 3));
             add(new JScrollPane(category));
             add(new JScrollPane(plan));
             add(new JScrollPane(spend));
-            transformCategoryData();
-            transformSpendData();
+
         }
 
 
@@ -75,32 +74,25 @@ public class PlannerPanel extends JPanel {
         }
 
         public void transformSpendData() {
-            int i = 0;
-
-            //budgetPlanner.estimateMeanBudget();
             Summary summary = budgetPlanner.getEstimatedBudget();
-            if(summary!=null) {
+
+            if (summary != null) {
                 Map<CategoryType, CategoryExpensesType> map = summary.getCategoryExpensesMap();
 
-
+                int i = 0;
                 for (CategoryType categoryType : CategoryType.values()) {
-
                     CategoryExpensesType categoryExpensesType = map.get(categoryType);
-
-                    if (categoryExpensesType != null)
+                    if (categoryExpensesType != null) {
                         spend.getModel().setValueAt(map.get(categoryType).getExpenses(), i, 0);
-
-                    else
+                    } else {
                         spend.getModel().setValueAt(0, i, 0);
-
+                    }
                     i++;
                 }
-            }
-
-            else
+            } else {
                 System.out.println("Nie ma");
+            }
         }
-
-
     }
+
 }

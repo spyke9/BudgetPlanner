@@ -74,7 +74,7 @@ public class TransactionService {
 
     public CategorySpendingStats categorySpendingStats(CategoryType category, LocalDate dateFrom, LocalDate dateTo) {
         List<MonthlyExpensesType> stats = new ArrayList<>();
-        for (LocalDate date = dateFrom; date.isBefore(dateTo); date.plusMonths(1)) {
+        for (LocalDate date = dateFrom; date.isBefore(dateTo); date = date.plusMonths(1)) {
             stats.add(sumTransactionsPerMonth(date, category));
         }
         return new CategorySpendingStats(category, dateFrom, dateTo, stats);

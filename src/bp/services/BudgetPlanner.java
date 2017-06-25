@@ -97,7 +97,7 @@ public class BudgetPlanner {
         double sum = 0.0;
         double n = 0.0;
 
-        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp.plusMonths(1)) {
+        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp = tmp.plusMonths(1)) {
             Summary summary = summaryRepository.getById(tmp);
             if (summary != null) {
                 sum += summary.getCategoryExpensesMap().get(category).getExpenses();
@@ -112,7 +112,7 @@ public class BudgetPlanner {
         double income = 0.0;
         double n = 0.0;
 
-        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp.plusMonths(1)) {
+        for (LocalDate tmp = summaryRepository.getMinDate(); tmp.isBefore(date); tmp = tmp.plusMonths(1)) {
             Summary summary = summaryRepository.getById(tmp);
             if (summary != null) {
                 expense += summary.getExpensesAndIncome().getExpenses();
