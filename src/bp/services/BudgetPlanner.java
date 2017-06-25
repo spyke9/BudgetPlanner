@@ -32,6 +32,9 @@ public class BudgetPlanner {
 
 
     public Summary getEstimatedBudget() {
+        if (estimatedBudget == null) {
+            estimatedBudget = calculateMeanSummary(LocalDate.now());
+        }
         return estimatedBudget;
     }
 
@@ -102,7 +105,7 @@ public class BudgetPlanner {
             }
         }
         return sum / n;
-      }
+    }
 
     private MonthlyExpensesAndIncomeType calculateMeanExpensesAndIncome(LocalDate date) {
         double expense = 0.0;
@@ -141,5 +144,15 @@ public class BudgetPlanner {
         return summary;
     }
 
+    public double checkPlannedBudget() {
+        double plannedExpense = 0.0, estimatedExpense = 0.0;
+        if (estimatedBudget != null && plannedBudget != null) {
+            for (CategoryType category : CategoryType.values()) {
+                plannedExpense += plannedBudget.getCategoryExpensesMap().get(category).getExpenses();
+                estimatedExpense += estimatedBudget.getCategoryExpensesMap().get(category).getExpenses();
+            }
+        }
+        return plannedExpense - estimatedExpense;
+    }
 
 }

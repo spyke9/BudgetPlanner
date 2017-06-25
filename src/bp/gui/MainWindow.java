@@ -141,6 +141,7 @@ public class MainWindow extends JFrame {
                     transactionService.addTransaction(transaction);
 
                 }
+                summaryService.updateSummaryRepository(LocalDate.of(y, m, 1));
             }
         }
 
