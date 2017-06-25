@@ -59,7 +59,15 @@ public class SummaryService {
         return summaries;
     }
 
-    public Summary summaryPerMonth(LocalDate date) {
+    public void updateSummaryRepository(LocalDate date) {
+        if (summaryRepository.getById(date) != null) {
+            summaryRepository.update(date, summaryPerMonth(date));
+        } else {
+            addSummary(summaryPerMonth(date));
+        }
+    }
+
+    private Summary summaryPerMonth(LocalDate date) {
         Summary summary = new Summary(date);
 
         double expensePerMonth = 0.0;

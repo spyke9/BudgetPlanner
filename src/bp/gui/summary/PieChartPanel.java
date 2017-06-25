@@ -78,8 +78,6 @@ public class PieChartPanel extends JPanel {
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {
             String chosenYearStr = (String) jComboBox.getSelectedItem();
-            System.out.println(chosenYearStr);
-
             int year = Integer.parseInt(chosenYearStr);
             LocalDate newDate = LocalDate.of(year, pieChart.getDate().getMonth(), 1);
 
@@ -100,10 +98,9 @@ public class PieChartPanel extends JPanel {
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {
             String chosenMonthStr = (String) jComboBox.getSelectedItem();
-            System.out.println(chosenMonthStr);
             Month month = Month.valueOf(chosenMonthStr.toUpperCase());
-
             LocalDate date = LocalDate.of(pieChart.getDate().getYear(), month, 1);
+
             pieChart.getChartPanel().setChart(pieChart.updateChart(date));
 
             validate();
