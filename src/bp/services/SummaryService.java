@@ -33,13 +33,13 @@ public class SummaryService {
     public void addSummary(Summary summary) {
         if (summaryRepository.getMinDate() == null) {
             summaryRepository.setMinDate(summary.getDate());
+        } else {
+            if (summary.getDate().isBefore(summaryRepository.getMinDate())) {
+                summaryRepository.setMinDate(summary.getDate());
+            }
         }
         summaryRepository.addItem(summary.getDate(), summary);
     }
-
-    //    public void addSummaryFromMap(LocalDate date, Map<CategoryType, Double>) {
-//
-//    }
 
     public LocalDate getMinDate() {
         return summaryRepository.getMinDate();

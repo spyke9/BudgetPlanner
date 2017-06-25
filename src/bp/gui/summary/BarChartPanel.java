@@ -52,10 +52,11 @@ public class BarChartPanel extends JPanel {
 
     private JComboBox createYearComboBox() {
         List<String> labels = new ArrayList<>();
-        int now = LocalDate.now().getYear();
-//        for (int year = summaryService.getMinDate().getYear(); year <= now; year++) {
-        for (int year = now; year >= 2013; year--) {
-            labels.add(String.valueOf(year));
+        LocalDate minYear = summaryService.getMinDate();
+        if (minYear != null) {
+            for (int year = LocalDate.now().getYear(); year >= minYear.getYear(); year--) {
+                labels.add(String.valueOf(year));
+            }
         }
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {

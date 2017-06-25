@@ -105,17 +105,38 @@ public class MainWindow extends JFrame {
         GraphService graphService = new GraphService(summaryRepository);
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
-//        Random random = new Random();
-//        for (int i = 1; i < 5; i++) {
-//            LocalDate date = LocalDate.of(2010 + i, random.nextInt(11) + 1, 1);
-//            Summary exampleSummary = new Summary(date);
-//            for (CategoryType categoryType : CategoryType.values()) {
-//                exampleSummary.addExpense(new CategoryExpensesType(date, categoryType, random.nextInt(100)));
-//            }
-//            exampleSummary.setExpensesAndIncome(
-//                    new MonthlyExpensesAndIncomeType(LocalDate.now(), random.nextInt(1000), random.nextInt(1000)));
-//            summaryService.addSummary(exampleSummary);
-//        }
+        Random random = new Random();
+        for (int i = 2010; i < 2016; i++) {
+            LocalDate date1 = LocalDate.of(i, 2, 1);
+            LocalDate date2 = LocalDate.of(i, 3, 1);
+            Summary exampleSummary1 = new Summary(date1);
+            Summary exampleSummary2 = new Summary(date2);
+
+            for (CategoryType categoryType : CategoryType.values()) {
+                exampleSummary1.addExpense(new CategoryExpensesType(date1, categoryType, random.nextInt(100)));
+                exampleSummary2.addExpense(new CategoryExpensesType(date2, categoryType, random.nextInt(100)));
+            }
+            exampleSummary1.setExpensesAndIncome(
+                    new MonthlyExpensesAndIncomeType(date1, random.nextInt(1000), random.nextInt(1000)));
+            exampleSummary2.setExpensesAndIncome(
+                    new MonthlyExpensesAndIncomeType(date2, random.nextInt(1000), random.nextInt(1000)));
+
+            summaryService.addSummary(exampleSummary1);
+            summaryService.addSummary(exampleSummary2);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 
