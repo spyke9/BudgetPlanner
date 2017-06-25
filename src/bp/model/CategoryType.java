@@ -21,6 +21,11 @@ public enum CategoryType {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+
     public static CategoryType fromName(String name) {
         for (CategoryType category : CategoryType.values()) {
             if (Objects.equals(category.name, name)) {
@@ -31,20 +36,13 @@ public enum CategoryType {
     }
 
     public static List<String> getNames() {
-
-        List<String> categoryNames = new ArrayList<String>();
+        List<String> categoryNames = new ArrayList<>();
 
         for (CategoryType categoryType : CategoryType.values()) {
-
             categoryNames.add(categoryType.name);
         }
-
         return categoryNames;
 
     }
 
-
-    public String getName() {
-        return name;
-    }
 }

@@ -22,6 +22,14 @@ public class SummaryService {
         this.transactionRepository = transactionRepository;
     }
 
+    public SummaryRepository getSummaryRepository() {
+        return summaryRepository;
+    }
+
+    public TransactionRepository getTransactionRepository() {
+        return transactionRepository;
+    }
+
     public void addSummary(Summary summary) {
         if (summaryRepository.getMinDate() == null) {
             summaryRepository.setMinDate(summary.getDate());
@@ -29,9 +37,13 @@ public class SummaryService {
         summaryRepository.addItem(summary.getDate(), summary);
     }
 
-//    public void addSummaryFromMap(LocalDate date, Map<CategoryType, Double>) {
+    //    public void addSummaryFromMap(LocalDate date, Map<CategoryType, Double>) {
 //
 //    }
+
+    public LocalDate getMinDate() {
+        return summaryRepository.getMinDate();
+    }
 
     public Collection<Summary> getAllSummaries() {
         return summaryRepository.getAll();

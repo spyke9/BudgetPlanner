@@ -22,17 +22,13 @@ public class GraphService {
         this.summaryRepository = summaryRepository;
     }
 
-    public Map<CategoryType, Double> pieChart(LocalDate date) {
-        Summary summaryChart = summaryRepository.getById(date);
-        Map<CategoryType, Double> res = new HashMap<>();
-        double sum = 0.0;
+    public Map<String, Double> pieChart(LocalDate date) {
+        Summary summaryChart = summaryRepository.getById(date.withDayOfMonth(1));
+        Map<String, Double> res = new HashMap<>();
+
         for (CategoryType category : CategoryType.values()) {
             double expensePerCategory = summaryChart.getCategoryExpensesMap().get(category).getExpenses();
-            sum += expensePerCategory;
-        }
-        for (CategoryType category : CategoryType.values()) {
-            double expensePerCategory = summaryChart.getCategoryExpensesMap().get(category).getExpenses();
-            res.put(category, expensePerCategory / sum);
+            res.put(category.getName(), expensePerCategory);
         }
         return res;
     }
@@ -41,7 +37,9 @@ public class GraphService {
         List<MonthlyExpensesAndIncomeType> monthlyExpensesAndIncomeList = new ArrayList<>();
         for (Month month : Month.values()) {
             Summary summary = summaryRepository.getById(LocalDate.of(year, month, 1));
-            monthlyExpensesAndIncomeList.add(summary.getExpensesAndIncome());
+            if (summary != null) {
+                monthlyExpensesAndIncomeList.add(summary.getExpensesAndIncome());
+            }
         }
         return monthlyExpensesAndIncomeList;
     }

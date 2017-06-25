@@ -8,7 +8,8 @@ public class MonthlyExpensesType implements Serializable {
     private LocalDate date;
     private double expenses;
 
-    public MonthlyExpensesType() {
+    public MonthlyExpensesType(LocalDate date) {
+        this.date = date;
     }
 
     public MonthlyExpensesType(LocalDate date, double expenses) {

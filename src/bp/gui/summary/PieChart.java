@@ -1,66 +1,79 @@
 package bp.gui.summary;
 
-import org.jfree.data.general.PieDataset;
-
-import javax.swing.*;
-
-
-import javax.swing.JFrame;
-
+import bp.services.GraphService;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
+import org.jfree.ui.RectangleEdge;
 import org.jfree.util.Rotation;
 
+import javax.swing.*;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.util.Map;
 
-public class PieChart extends JFrame {
+/**
+ * Created by agnieszka on 18.06.2017.
+ */
+public class PieChart extends JPanel {
+    private GraphService graphService;
+    private ChartPanel chartPanel;
+    private LocalDate date;
 
-    private static final long serialVersionUID = 1L;
+    public PieChart(LocalDate date, GraphService graphService) {
+        this.graphService = graphService;
+        this.date = date;
 
-    public PieChart(String applicationTitle, String chartTitle) {
-        super(applicationTitle);
-        // This will create the dataset
-        PieDataset dataset = createDataset();
-        // based on the dataset we create the chart
-        JFreeChart chart = createChart(dataset, chartTitle);
-        // we put the chart into a panel
-        ChartPanel chartPanel = new ChartPanel(chart);
-        // default size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        // add it to our application
-        setContentPane(chartPanel);
-
+        chartPanel = new ChartPanel(updateChart(date));
+        add(chartPanel);
     }
 
-    /**
-     * Creates a sample dataset
-     */
-    private PieDataset createDataset() {
+    public JFreeChart updateChart(LocalDate date) {
+        this.date = date;
+        return createChart(createDataset(date), "Expenses by category");
+    }
+
+    private PieDataset createDataset(LocalDate date) {
         DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Linux", 29);
-        result.setValue("Mac", 20);
-        result.setValue("Windows", 51);
-        return result;
 
+        Map<String, Double> pieChartData = graphService.pieChart(date);
+        for (String s : pieChartData.keySet()) {
+            result.setValue(s, pieChartData.get(s));
+        }
+
+        return result;
     }
 
-    /**
-     * Creates a chart
-     */
     private JFreeChart createChart(PieDataset dataset, String title) {
+        JFreeChart chart = ChartFactory.createPieChart(title, dataset, true, true, false);
 
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-
-        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        LegendTitle legend = chart.getLegend();
+        legend.setPosition(RectangleEdge.RIGHT);
+        PiePlot plot = (PiePlot) chart.getPlot();
         plot.setStartAngle(290);
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
-        return chart;
 
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+                "{1}PLN, {2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
+
+//        plot.setSimpleLabels(true);
+//        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
+//                "{2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
+
+        return chart;
+    }
+
+    public ChartPanel getChartPanel() {
+        return chartPanel;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }
-
-
