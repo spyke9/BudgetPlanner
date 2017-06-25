@@ -2,10 +2,10 @@ package bp.gui.summary;
 
 import bp.services.GraphService;
 import bp.services.SummaryService;
-import org.jfree.data.time.Month;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -27,6 +27,8 @@ public class PieChartPanel extends JPanel {
     private JComboBox monthComboBox;
     private JComboBox yearComboBox;
 
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM");
+
 
     public PieChartPanel(SummaryService summaryService, GraphService graphService) {
         this.summaryService = summaryService;
@@ -35,8 +37,8 @@ public class PieChartPanel extends JPanel {
         monthLabel = new JLabel("Month: ");
         monthLabel.setHorizontalAlignment(JLabel.CENTER);
         monthLabel.setSize(1, 1);
-//        monthComboBox = createMonthComboBox();
-        monthComboBox = new JComboBox();
+        monthComboBox = createMonthComboBox();
+//        monthComboBox = new JComboBox();
         monthComboBox.setSize(1, 1);
 
         yearLabel = new JLabel("Year: ");
@@ -88,11 +90,13 @@ public class PieChartPanel extends JPanel {
 
     private JComboBox createMonthComboBox() {
         List<String> labels = new ArrayList<>();
-        LocalDate date1 = LocalDate.of(2000, java.time.Month.JANUARY, 1);
-        LocalDate date2 = LocalDate.of(2001, java.time.Month.JANUARY, 1);
+        LocalDate date1 = LocalDate.of(2000, 1, 1);
+        LocalDate date2 = LocalDate.of(2001, 1, 1);
 //        for (int i = 0; i < 12; i++) {
-        for (; date1.isBefore(date2); date1.plusMonths(1)) {
+
+        for (; date1.isBefore(date2); date1 = date1.plusMonths(1)) {
             labels.add(date1.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
+//            System.out.println(date1.getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()));
         }
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
 //        JComboBox jComboBox = new JComboBox(java.time.Month.values());

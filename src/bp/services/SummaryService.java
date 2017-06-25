@@ -22,6 +22,14 @@ public class SummaryService {
         this.transactionRepository = transactionRepository;
     }
 
+    public SummaryRepository getSummaryRepository() {
+        return summaryRepository;
+    }
+
+    public TransactionRepository getTransactionRepository() {
+        return transactionRepository;
+    }
+
     public void addSummary(Summary summary) {
         if (summaryRepository.getMinDate() == null) {
             summaryRepository.setMinDate(summary.getDate());

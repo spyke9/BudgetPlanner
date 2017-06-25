@@ -13,6 +13,8 @@ import bp.repository.TransactionRepository;
 import bp.services.*;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -21,21 +23,20 @@ import java.util.Random;
  */
 public class MainWindow extends JFrame {
 
+
     public MainWindow(TransactionService transactionService,
                       SummaryService summaryService,
                       GraphService graphService,
                       BudgetPlanner budgetPlanner) {
 
-        TransactionsPanel transactionpanel = new TransactionsPanel(transactionService);
+        TransactionsPanel transactionsPanel = new TransactionsPanel(transactionService);
         PlannerPanel plannerPanel = new PlannerPanel();
         JTabbedPane table = new JTabbedPane();
         SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
 
-
-        table.add("Transactions", transactionpanel);
+        table.add("Transactions", transactionsPanel);
         table.add("Planner", plannerPanel);
         table.add("Summary", summaryPanel);
-
 
         this.setTitle("BudgetPlanner");
         this.setLocationRelativeTo(null);
@@ -44,6 +45,39 @@ public class MainWindow extends JFrame {
         this.setResizable(false);
 
         add(table);
+
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Serializer.serialize(summaryService.getTransactionRepository(), Configuration.TRANSACTION_REPOSITORY_FILE);
+                Serializer.serialize(summaryService.getSummaryRepository(), Configuration.SUMMARY_REPOSITORY_FILE);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
+
         this.setVisible(true);
     }
 
@@ -71,21 +105,19 @@ public class MainWindow extends JFrame {
         GraphService graphService = new GraphService(summaryRepository);
         BudgetPlanner budgetPlanner = new BudgetPlanner(summaryRepository);
 
-        Random random = new Random();
-        for (int i = 1; i < 5; i++) {
-            LocalDate date = LocalDate.of(2010 + i, random.nextInt(11) + 1, 1);
-            Summary exampleSummary = new Summary(date);
-            for (CategoryType categoryType : CategoryType.values()) {
-                exampleSummary.addExpense(new CategoryExpensesType(date, categoryType, random.nextInt(100)));
-            }
-            exampleSummary.setExpensesAndIncome(
-                    new MonthlyExpensesAndIncomeType(LocalDate.now(), random.nextInt(1000), random.nextInt(1000)));
-            summaryService.addSummary(exampleSummary);
-        }
-        MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
+//        Random random = new Random();
+//        for (int i = 1; i < 5; i++) {
+//            LocalDate date = LocalDate.of(2010 + i, random.nextInt(11) + 1, 1);
+//            Summary exampleSummary = new Summary(date);
+//            for (CategoryType categoryType : CategoryType.values()) {
+//                exampleSummary.addExpense(new CategoryExpensesType(date, categoryType, random.nextInt(100)));
+//            }
+//            exampleSummary.setExpensesAndIncome(
+//                    new MonthlyExpensesAndIncomeType(LocalDate.now(), random.nextInt(1000), random.nextInt(1000)));
+//            summaryService.addSummary(exampleSummary);
+//        }
 
-        Serializer.serialize(transactionRepository, Configuration.TRANSACTION_REPOSITORY_FILE);
-        Serializer.serialize(summaryRepository, Configuration.SUMMARY_REPOSITORY_FILE);
+        MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 
     }
 
