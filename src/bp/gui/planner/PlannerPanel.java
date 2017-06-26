@@ -87,7 +87,7 @@ public class PlannerPanel extends JPanel {
             Map<CategoryType, CategoryExpensesType> map = summary.getCategoryExpensesMap();
             int i = 1;
 
-            spend.getModel().setValueAt(summary.getExpensesAndIncome().getIncome(), i, 0);
+            spend.getModel().setValueAt(summary.getExpensesAndIncome().getIncome(), 0, 0);
 
             if (summary != null) {
 
