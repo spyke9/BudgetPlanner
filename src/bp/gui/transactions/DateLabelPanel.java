@@ -27,7 +27,6 @@ public class DateLabelPanel extends JPanel {
         date2.setHorizontalAlignment(JLabel.RIGHT);
 
 
-
     }
 
 

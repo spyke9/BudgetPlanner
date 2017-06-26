@@ -3,10 +3,8 @@ package bp.gui.transactions;
 import bp.model.ITransaction;
 import bp.services.TransactionService;
 
-import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Created by agnieszka on 22.06.2017.
@@ -62,7 +60,7 @@ public class AbstractTableModel extends javax.swing.table.AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    public void transformData(){
+    public void transformData() {
         int i = 0;
 
         for (ITransaction iTransaction : collection) {

@@ -1,6 +1,5 @@
 package bp.gui.transactions;
 
-import bp.model.ITransaction;
 import bp.services.SummaryService;
 import bp.services.TransactionService;
 
@@ -10,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collection;
 
 /**
  * Created by agnieszka on 21.06.2017.
@@ -24,10 +22,10 @@ public class DateTextPanel extends JPanel implements ActionListener {
     private AbstractTableModel tableModel;
 
 
-    public DateTextPanel(TransactionService transactionService, AbstractTableModel tableModel,SummaryService summaryService) {
-        LocalDate datenow=LocalDate.now();
+    public DateTextPanel(TransactionService transactionService, AbstractTableModel tableModel, SummaryService summaryService) {
+        LocalDate datenow = LocalDate.now();
         this.transactionService = transactionService;
-        this.summaryService=summaryService;
+        this.summaryService = summaryService;
         this.tableModel = tableModel;
         date1text = new JTextField(summaryService.getMinDate().toString());
         date2text = new JTextField(datenow.toString());

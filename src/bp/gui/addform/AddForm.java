@@ -3,7 +3,6 @@ package bp.gui.addform;
 
 import bp.gui.transactions.AbstractTableModel;
 import bp.model.CategoryType;
-import bp.model.Summary;
 import bp.model.Transaction;
 import bp.services.SummaryService;
 import bp.services.TransactionService;
@@ -14,11 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created by agnieszka on 17.06.2017.

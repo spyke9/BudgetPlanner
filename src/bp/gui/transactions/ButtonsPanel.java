@@ -1,8 +1,6 @@
 package bp.gui.transactions;
 
-import bp.gui.MainWindow;
 import bp.gui.addform.AddForm;
-import bp.model.Transaction;
 import bp.services.SummaryService;
 import bp.services.TransactionService;
 
@@ -16,7 +14,7 @@ import java.awt.event.ActionListener;
  */
 public class ButtonsPanel extends JPanel implements ActionListener {
 
-    //private TransactionRepository repository;
+
     private JButton addbutton, deletebutton, modifybutton;
     TransactionService transactionService;
     SummaryService summaryService;

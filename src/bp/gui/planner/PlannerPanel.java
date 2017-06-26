@@ -1,6 +1,9 @@
 package bp.gui.planner;
 
-import bp.model.*;
+import bp.model.CategoryExpensesType;
+import bp.model.CategoryType;
+import bp.model.MonthlyExpensesAndIncomeType;
+import bp.model.Summary;
 import bp.services.BudgetPlanner;
 
 import javax.swing.*;
@@ -96,7 +99,7 @@ public class PlannerPanel extends JPanel {
                     CategoryExpensesType categoryExpensesType = map.get(categoryType);
                     if (categoryExpensesType != null) {
                         spend.getModel().setValueAt(map.get(categoryType).getExpenses(), i, 0);
-                        //spend.getModel().setValueAt( Double.parseDouble(format.format(map.get(categoryType).getExpenses())), i, 0);
+
                     } else {
                         spend.getModel().setValueAt(0.0, i, 0);
                     }
@@ -196,13 +199,14 @@ public class PlannerPanel extends JPanel {
 
 
     }
+
     public class SavePanel extends JPanel implements ActionListener {
 
         private JButton saveButton;
         private BudgetPlanner budgetPlanner;
 
         public SavePanel(BudgetPlanner budgetPlanner) {
-            this.budgetPlanner=budgetPlanner;
+            this.budgetPlanner = budgetPlanner;
             saveButton = new JButton("Save");
             saveButton.addActionListener(this);
 
