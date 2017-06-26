@@ -28,7 +28,7 @@ public class MainWindow extends JFrame {
                       GraphService graphService,
                       BudgetPlanner budgetPlanner) {
 
-        TransactionsPanel transactionsPanel = new TransactionsPanel(transactionService);
+        TransactionsPanel transactionsPanel = new TransactionsPanel(transactionService, summaryService);
         PlannerPanel plannerPanel = new PlannerPanel(budgetPlanner);
         JTabbedPane table = new JTabbedPane();
         SummaryPanel summaryPanel = new SummaryPanel(summaryService, graphService);
@@ -125,25 +125,25 @@ public class MainWindow extends JFrame {
 //            summaryService.addSummary(exampleSummary2);
 //        }
 
-        for (int y = 2010; y < 2017; y++) {
-            for (int m = 1; m <= 12; m++) {
-                for (int d = 1; d < 28; d++) {
-                    LocalDate date = LocalDate.of(y, m, d);
-                    CategoryType[] categoryTypeList = CategoryType.values();
-                    int rCat = random.nextInt(categoryTypeList.length);
-
-                    Transaction transaction = new Transaction();
-                    transaction.setDate(date);
-                    transaction.setCategory(categoryTypeList[rCat]);
-                    transaction.setType(Transaction.TransactionType.EXPENSE);
-                    transaction.setAmount(random.nextInt(100) + random.nextDouble());
-
-                    transactionService.addTransaction(transaction);
-
-                }
-                summaryService.updateSummaryRepository(LocalDate.of(y, m, 1));
-            }
-        }
+//        for (int y = 2010; y < 2017; y++) {
+//            for (int m = 1; m <= 12; m++) {
+//                for (int d = 1; d < 28; d++) {
+//                    LocalDate date = LocalDate.of(y, m, d);
+//                    CategoryType[] categoryTypeList = CategoryType.values();
+//                    int rCat = random.nextInt(categoryTypeList.length);
+//
+//                    Transaction transaction = new Transaction();
+//                    transaction.setDate(date);
+//                    transaction.setCategory(categoryTypeList[rCat]);
+//                    transaction.setType(Transaction.TransactionType.EXPENSE);
+//                    transaction.setAmount(random.nextInt(100) + random.nextDouble());
+//
+//                    transactionService.addTransaction(transaction);
+//
+//                }
+//                summaryService.updateSummaryRepository(LocalDate.of(y, m, 1));
+//            }
+//        }
 
         MainWindow window = new MainWindow(transactionService, summaryService, graphService, budgetPlanner);
 

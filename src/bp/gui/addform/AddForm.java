@@ -3,7 +3,9 @@ package bp.gui.addform;
 
 import bp.gui.transactions.AbstractTableModel;
 import bp.model.CategoryType;
+import bp.model.Summary;
 import bp.model.Transaction;
+import bp.services.SummaryService;
 import bp.services.TransactionService;
 
 import javax.swing.*;
@@ -34,14 +36,16 @@ public class AddForm extends JFrame implements ActionListener {
     private JComboBox typecombobox = new JComboBox();
     private LabelPanel labelPanel = new LabelPanel();
     private JTextField amountfield = new JTextField("0.0");
-    TransactionService transactionService;
+    private TransactionService transactionService;
+    private SummaryService summaryService;
     private AbstractTableModel tableModel;
 
 
-    public AddForm(TransactionService transactionService, AbstractTableModel abstractTableModel) {
+    public AddForm(TransactionService transactionService, SummaryService summaryService, AbstractTableModel abstractTableModel) {
 
         this.tableModel = abstractTableModel;
         this.transactionService = transactionService;
+        this.summaryService = summaryService;
 
         buttonpanel.setLayout(new GridLayout(1, 2));
         buttonpanel.add(addbutton);
@@ -88,9 +92,7 @@ public class AddForm extends JFrame implements ActionListener {
             Transaction transaction = new Transaction();
             String getdate = dateTextField.getText();
             String getcategory = categorycombobox.getSelectedItem().toString();
-            System.out.println("selected category: " + getcategory);
             String gettype = typecombobox.getSelectedItem().toString();
-            System.out.println("selected type: " + gettype);
             String getamount = amountfield.getText();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -103,8 +105,9 @@ public class AddForm extends JFrame implements ActionListener {
             transaction.setDate(localDate);
             transaction.setType(Transaction.TransactionType.fromName(gettype));
 
-            System.out.println(transaction);
             transactionService.addTransaction(transaction);
+            summaryService.updateSummaryRepository(localDate);
+
             tableModel.update();
 
 
