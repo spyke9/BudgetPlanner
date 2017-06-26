@@ -1,6 +1,6 @@
 Aplikacja BudgetPlanner
 
-BudgetPlanner to aplikacja służąca do zapisywania wydatków i przychodów oraz wyświetlania historii transakcji, z możliwością zapisania planowanych wydatków dla każdej kategorii. W momencie, gdy użytkownik zaplanuje wydać większą ilość pieniędzy niż posiada, zostaje wystosowany odpowiedni komunikat. Dodatkowo użytkownik może zobaczyć jak wygląda rozkład wydawanych przez niego pieniędzy:
+BudgetPlanner to aplikacja służąca do zapisywania wydatków i przychodów oraz wyświetlania historii transakcji, z możliwością zapisania planowanych wydatków dla każdej kategorii. Dodatkowo użytkownik może zobaczyć jak wygląda rozkład wydawanych przez niego pieniędzy:
 - w podziale na kategorie dla danego miesiąca na wykresie kołowym,
 - w podziale na miesiące dla danego roku na wykresie słupkowym.
 Dane dotyczące transakcji są odczytywane z pliku przy uruchomieniu aplikacji oraz zapisywane przy zamknięciu.
@@ -12,6 +12,7 @@ Zadania programu:
 - gromadzenie danych o faktycznych dochodach i płatnościach dla każdego miesiąca i kategorii
 - prognozowanie wydatków na kolejny miesiąc
 - możliwość wpowadzenia planowanych wydatków na kolejny miesiąc
-- ostrzeganie o przekroczeniu budżetu
 - przedstawienie wydatków z danego miesiąca w podziale na kategorie na wykresie
 - przedstawienie wydatków i przychodów z poszczególnych miesięcy na wykresie
+
+Program uruchomić można ze środowiska poprzez wywołanie funkcji main z klasy MainWindow.
