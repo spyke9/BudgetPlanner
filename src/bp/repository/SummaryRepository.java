@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class SummaryRepository extends GenericRepository<LocalDate, Summary> {
 
-    private LocalDate minDate = LocalDate.MAX;
+    private LocalDate minDate = LocalDate.now();
 
     public void setMinDate(LocalDate minDate) {
         this.minDate = minDate;

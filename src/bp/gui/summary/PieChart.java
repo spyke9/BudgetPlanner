@@ -61,11 +61,6 @@ public class PieChart extends JPanel {
 
         plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
                 "{1}PLN, {2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
-
-//        plot.setSimpleLabels(true);
-//        plot.setLabelGenerator(new StandardPieSectionLabelGenerator(
-//                "{2}", NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance()));
-
         return chart;
     }
 

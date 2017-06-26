@@ -39,7 +39,6 @@ public class PieChartPanel extends JPanel {
         monthLabel.setHorizontalAlignment(JLabel.CENTER);
         monthLabel.setSize(1, 1);
         monthComboBox = createMonthComboBox();
-//        monthComboBox = new JComboBox();
         monthComboBox.setSize(1, 1);
 
         yearLabel = new JLabel("Year: ");
@@ -50,7 +49,6 @@ public class PieChartPanel extends JPanel {
 
         dateChoicePanel = new JPanel();
         dateChoicePanel.setLayout(new GridLayout(1, 4));
-//        dateChoicePanel.setSize(4, 0);
         dateChoicePanel.add(monthLabel);
         dateChoicePanel.add(monthComboBox);
         dateChoicePanel.add(yearLabel);
@@ -95,7 +93,7 @@ public class PieChartPanel extends JPanel {
     private JComboBox createMonthComboBox() {
         List<String> labels = new ArrayList<>();
         for (Month month : Month.values()) {
-            labels.add(month.getDisplayName(TextStyle.FULL, Locale.getDefault()));
+            labels.add(month.getDisplayName(TextStyle.FULL, Locale.US));
         }
         JComboBox jComboBox = new JComboBox(labels.toArray(new String[1]));
         jComboBox.addActionListener(e -> {

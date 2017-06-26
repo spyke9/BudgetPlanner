@@ -16,16 +16,20 @@ public class BudgetPlanner {
     private Summary estimatedBudget;
     private Summary plannedBudget;
 
-//    TODO sprawdzic czy plan nie zaklada wydania wiecej niz posiada uzytkownik
-
     public BudgetPlanner(SummaryRepository summaryRepository) {
         this.summaryRepository = summaryRepository;
     }
 
+    /**
+     * Prognoza liczona za pomoca metody usredniania zwrotow dla kazdej kategorii i przychodu
+     */
     public void estimateBudget() {
         this.estimatedBudget = calculatePrognosis(LocalDate.now());
     }
 
+    /**
+     * Prognoza to srednie wydatki dla kategorii i przychodu
+     */
     public void estimateMeanBudget() {
         this.estimatedBudget = calculateMeanSummary(LocalDate.now());
     }
@@ -33,7 +37,7 @@ public class BudgetPlanner {
 
     public Summary getEstimatedBudget() {
         if (estimatedBudget == null) {
-            estimatedBudget = calculateMeanSummary(LocalDate.now());
+            estimateMeanBudget();
         }
         return estimatedBudget;
     }

@@ -43,7 +43,7 @@ public class BarChart extends JPanel {
         List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(year);
         if (barGraphData != null) {
             for (MonthlyExpensesAndIncomeType item : barGraphData) {
-                String x = item.getDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.getDefault());
+                String x = item.getDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.US);
                 dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
                 dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
             }
@@ -66,7 +66,6 @@ public class BarChart extends JPanel {
         plot.setBackgroundPaint(Color.lightGray);
         plot.setDomainGridlinePaint(Color.white);
         plot.setRangeGridlinePaint(Color.white);
-
 
         return chart;
     }
