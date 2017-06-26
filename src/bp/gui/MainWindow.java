@@ -125,7 +125,7 @@ public class MainWindow extends JFrame {
 //            summaryService.addSummary(exampleSummary2);
 //        }
 
-//        for (int y = 2010; y < 2017; y++) {
+//        for (int y = 2010; y <= 2017; y++) {
 //            for (int m = 1; m <= 12; m++) {
 //                for (int d = 1; d < 28; d++) {
 //                    LocalDate date = LocalDate.of(y, m, d);
