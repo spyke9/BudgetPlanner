@@ -95,21 +95,25 @@ public class AddForm extends JFrame implements ActionListener {
             String gettype = typecombobox.getSelectedItem().toString();
             String getamount = amountfield.getText();
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate localDate = LocalDate.parse(getdate, formatter);
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.parse(getdate, formatter);
 
+                double amount = Double.parseDouble(getamount);
+                transaction.setAmount(amount);
+                transaction.setDate(localDate);
+                transaction.setCategory(CategoryType.fromName(getcategory));
+                transaction.setType(Transaction.TransactionType.fromName(gettype));
 
-            double amount = Double.parseDouble(getamount);
-            transaction.setAmount(amount);
-            transaction.setCategory(CategoryType.fromName(getcategory));
-            transaction.setDate(localDate);
-            transaction.setType(Transaction.TransactionType.fromName(gettype));
+                transactionService.addTransaction(transaction);
+                summaryService.updateSummaryRepository(localDate);
 
-            transactionService.addTransaction(transaction);
-            summaryService.updateSummaryRepository(localDate);
+                tableModel.update();
 
-            tableModel.update();
+            } catch (Exception ex) {
+                System.out.println("Niepoprawny format danych");
 
+            }
 
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

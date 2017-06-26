@@ -22,7 +22,7 @@ public class TransactionsPanel extends JPanel {
         AbstractTableModel tableModel = new AbstractTableModel(transactionService);
         ButtonsPanel panel = new ButtonsPanel(transactionService, summaryService, tableModel);
         TransactionTable table = new TransactionTable(transactionService, tableModel);
-        DatePanel datePanel = new DatePanel(transactionService, tableModel);
+        DatePanel datePanel = new DatePanel(transactionService, tableModel,summaryService);
 
         setLayout(new BorderLayout());
         add(panel, BorderLayout.NORTH);

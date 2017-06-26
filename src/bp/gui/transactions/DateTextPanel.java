@@ -1,6 +1,7 @@
 package bp.gui.transactions;
 
 import bp.model.ITransaction;
+import bp.services.SummaryService;
 import bp.services.TransactionService;
 
 import javax.swing.*;
@@ -17,16 +18,19 @@ import java.util.Collection;
 public class DateTextPanel extends JPanel implements ActionListener {
 
     TransactionService transactionService;
+    SummaryService summaryService;
     private JTextField date1text, date2text;
     private JButton findButton;
     private AbstractTableModel tableModel;
 
 
-    public DateTextPanel(TransactionService transactionService, AbstractTableModel tableModel) {
+    public DateTextPanel(TransactionService transactionService, AbstractTableModel tableModel,SummaryService summaryService) {
+        LocalDate datenow=LocalDate.now();
         this.transactionService = transactionService;
+        this.summaryService=summaryService;
         this.tableModel = tableModel;
-        date1text = new JTextField("yyyy-mm-dd");
-        date2text = new JTextField("yyyy-mm-dd");
+        date1text = new JTextField(summaryService.getMinDate().toString());
+        date2text = new JTextField(datenow.toString());
         findButton = new JButton("Find");
         findButton.addActionListener(this);
 
