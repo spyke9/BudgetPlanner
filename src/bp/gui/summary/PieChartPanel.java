@@ -69,7 +69,7 @@ public class PieChartPanel extends JPanel {
         int now = LocalDate.now().getYear();
         LocalDate minDate = summaryService.getMinDate();
         if (minDate != null) {
-            for (int year = now; year > minDate.getYear(); year--) {
+            for (int year = now; year >= minDate.getYear(); year--) {
                 labels.add(String.valueOf(year));
             }
         }
