@@ -43,7 +43,7 @@ public class BarChart extends JPanel {
         List<MonthlyExpensesAndIncomeType> barGraphData = graphService.barGraph(year);
         if (barGraphData != null) {
             for (MonthlyExpensesAndIncomeType item : barGraphData) {
-                String x = item.getDate().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault());
+                String x = item.getDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.getDefault());
                 dataset.addValue(item.getExpenses(), Transaction.TransactionType.EXPENSE.getName(), x);
                 dataset.addValue(item.getIncome(), Transaction.TransactionType.INCOME.getName(), x);
             }
